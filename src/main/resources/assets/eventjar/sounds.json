@@ -1,0 +1,386 @@
+{
+  "bs": {
+    "sounds": [
+      {
+        "name": "eventjar:d47b6a43e277723",
+        "stream": true
+      }
+    ]
+  },
+  "cavesound": {
+    "sounds": [
+      {
+        "name": "eventjar:cave2",
+        "stream": false
+      }
+    ]
+  },
+  "cave3": {
+    "sounds": [
+      {
+        "name": "eventjar:cave3",
+        "stream": false
+      }
+    ]
+  },
+  "cave4": {
+    "sounds": [
+      {
+        "name": "eventjar:cave4",
+        "stream": false
+      }
+    ]
+  },
+  "cave5": {
+    "sounds": [
+      {
+        "name": "eventjar:cave5",
+        "stream": false
+      }
+    ]
+  },
+  "cave6": {
+    "sounds": [
+      {
+        "name": "eventjar:cave6",
+        "stream": false
+      }
+    ]
+  },
+  "cave9": {
+    "sounds": [
+      {
+        "name": "eventjar:cave9",
+        "stream": false
+      }
+    ]
+  },
+  "cave12": {
+    "sounds": [
+      {
+        "name": "eventjar:cave12",
+        "stream": false
+      }
+    ]
+  },
+  "cavejumpscare15": {
+    "sounds": [
+      {
+        "name": "eventjar:cave15",
+        "stream": false
+      }
+    ]
+  },
+  "cave18": {
+    "sounds": [
+      {
+        "name": "eventjar:cave18.ogg",
+        "stream": false
+      }
+    ]
+  },
+  "cave10": {
+    "sounds": [
+      {
+        "name": "eventjar:cave10",
+        "stream": false
+      }
+    ]
+  },
+  "glitchcow": {
+    "sounds": [
+      {
+        "name": "eventjar:fayfyaafyfyafay",
+        "stream": false
+      }
+    ]
+  },
+  "glitchjumpscare": {
+    "sounds": [
+      {
+        "name": "eventjar:2fb4ddef47d606d",
+        "stream": false
+      }
+    ]
+  },
+  "jachinthebox": {
+    "sounds": [
+      {
+        "name": "eventjar:jackinthebox",
+        "stream": false
+      }
+    ]
+  },
+  "jackthebox2": {
+    "sounds": [
+      {
+        "name": "eventjar:zvuki-muzyikalnoy-shkatulki-29044",
+        "stream": false
+      }
+    ]
+  },
+  "jackthebox3": {
+    "sounds": [
+      {
+        "name": "eventjar:granulirovannaya-muzyikalnaya-shkatulka",
+        "stream": false
+      }
+    ]
+  },
+  "childlaugh": {
+    "sounds": [
+      {
+        "name": "eventjar:robinhood76-01948-kid-laughter",
+        "stream": false
+      }
+    ]
+  },
+  "heartbeat": {
+    "sounds": [
+      {
+        "name": "eventjar:bienie-serdtsa-silnoe-uskorennoe",
+        "stream": false
+      }
+    ]
+  },
+  "undefine": {
+    "sounds": [
+      {
+        "name": "eventjar:undefine",
+        "stream": false
+      }
+    ]
+  },
+  "pills": {
+    "sounds": [
+      {
+        "name": "eventjar:medicine_antibiotics_foil_pack_movement_open_17596",
+        "stream": false
+      }
+    ]
+  },
+  "hammer": {
+    "sounds": [
+      {
+        "name": "eventjar:rfuk",
+        "stream": false
+      }
+    ]
+  },
+  "ijustwant": {
+    "sounds": [
+      {
+        "name": "eventjar:fvyfvyyfvfvyfvy",
+        "stream": false
+      }
+    ]
+  },
+  "musicmeet": {
+    "sounds": [
+      {
+        "name": "eventjar:untitled",
+        "stream": false
+      }
+    ]
+  },
+  "chaise": {
+    "sounds": [
+      {
+        "name": "eventjar:untitl2222ed",
+        "stream": false
+      }
+    ]
+  },
+  "helpme": {
+    "sounds": [
+      {
+        "name": "eventjar:helpme",
+        "stream": false
+      }
+    ]
+  },
+  "breath": {
+    "sounds": [
+      {
+        "name": "eventjar:zvuk-tjazhelogo-dyhanija",
+        "stream": false
+      }
+    ]
+  },
+  "gamemenu": {
+    "sounds": [
+      {
+        "name": "eventjar:piano-_1_",
+        "stream": false
+      }
+    ]
+  },
+  "steps": {
+    "sounds": [
+      {
+        "name": "eventjar:shagi-po-griazi-new-minecraft",
+        "stream": false
+      }
+    ]
+  },
+  "steps_seeker": {
+    "sounds": [
+      {
+        "name": "eventjar:step_1",
+        "stream": false
+      }
+    ]
+  },
+  "seekermusic": {
+    "sounds": [
+      {
+        "name": "eventjar:seekermusic",
+        "stream": false
+      }
+    ]
+  },
+  "godisloveyou": {
+    "sounds": [
+      {
+        "name": "eventjar:godisloveyou",
+        "stream": false
+      }
+    ]
+  },
+  "godisloveumusic": {
+    "sounds": [
+      {
+        "name": "eventjar:godisloveumusic",
+        "stream": false
+      }
+    ]
+  },
+  "glitch1": {
+    "sounds": [
+      {
+        "name": "eventjar:glitch1",
+        "stream": false
+      }
+    ]
+  },
+  "scaremusic_ogg": {
+    "sounds": [
+      {
+        "name": "eventjar:oggmusic_scare",
+        "stream": false
+      }
+    ]
+  },
+  "longglitch": {
+    "sounds": [
+      {
+        "name": "eventjar:glitch2long",
+        "stream": false
+      }
+    ]
+  },
+  "music_weird": {
+    "sounds": [
+      {
+        "name": "eventjar:randomnoise",
+        "stream": false
+      }
+    ]
+  },
+  "chaiseseeker": {
+    "sounds": [
+      {
+        "name": "eventjar:chaise",
+        "stream": false
+      }
+    ]
+  },
+  "breath2": {
+    "sounds": [
+      {
+        "name": "eventjar:breath2",
+        "stream": false
+      }
+    ]
+  },
+  "afterdeath": {
+    "sounds": [
+      {
+        "name": "eventjar:afterdeath",
+        "stream": false
+      }
+    ]
+  },
+  "appearance": {
+    "sounds": [
+      {
+        "name": "eventjar:appearance",
+        "stream": false
+      }
+    ]
+  },
+  "breath1": {
+    "sounds": [
+      {
+        "name": "eventjar:breath1",
+        "stream": false
+      }
+    ]
+  },
+  "chase": {
+    "sounds": [
+      {
+        "name": "eventjar:chase",
+        "stream": false
+      }
+    ]
+  },
+  "chase2layer": {
+    "sounds": [
+      {
+        "name": "eventjar:chase2layer",
+        "stream": false
+      }
+    ]
+  },
+  "bones": {
+    "sounds": [
+      {
+        "name": "eventjar:bones",
+        "stream": false
+      }
+    ]
+  },
+  "god_screem": {
+    "sounds": [
+      {
+        "name": "eventjar:god_screem",
+        "stream": false
+      }
+    ]
+  },
+  "asyoubreathe": {
+    "sounds": [
+      {
+        "name": "eventjar:untitled",
+        "stream": false
+      }
+    ]
+  },
+  "sonofgodvoice": {
+    "sounds": [
+      {
+        "name": "eventjar:sonofgodvoice",
+        "stream": false
+      }
+    ]
+  },
+  "mimicattack": {
+    "sounds": [
+      {
+        "name": "eventjar:scarysoundmimic",
+        "stream": false
+      }
+    ]
+  }
+}

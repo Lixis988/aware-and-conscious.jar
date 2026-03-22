@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%thread/%level] [%logger{36}]: %msg%n"/>
+            <Filters>
+                <!-- Block ALL Minecraft world-related warnings -->
+                <RegexFilter regex=".*moving_piston.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <RegexFilter regex=".*block entity.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <RegexFilter regex=".*LevelChunk.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <RegexFilter regex=".*WorldGenRegion.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <RegexFilter regex=".*Worker-Main.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <RegexFilter regex=".*Tried to load a block entity.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <RegexFilter regex=".*Tried to access a block entity.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <RegexFilter regex=".*but failed at location.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <RegexFilter regex=".*before it was created.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+        </Console>
+    </Appenders>
+    
+    <Loggers>
+        <!-- Completely turn off all problematic Minecraft loggers -->
+        <Logger level="OFF" name="net.minecraft.world.level.chunk.LevelChunk" additivity="false"/>
+        <Logger level="OFF" name="net.minecraft.world.level.WorldGenRegion" additivity="false"/>
+        <Logger level="OFF" name="net.minecraft.world.level" additivity="false"/>
+        <Logger level="OFF" name="net.minecraft.world" additivity="false"/>
+        <Logger level="OFF" name="minecraft.world" additivity="false"/>
+        
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

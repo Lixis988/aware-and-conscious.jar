@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "eventjar:block/wierd_portal_ew"
+    },
+    "axis=x": {
+      "model": "eventjar:block/wierd_portal_ns"
+    }
+  }
+}

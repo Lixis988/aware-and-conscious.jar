@@ -1,0 +1,112 @@
+{
+  "_fv": 60,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "button",
+        "data": {
+          "name": "button_yes",
+          "text": "yes",
+          "isUndecorated": false,
+          "onClick": {
+            "name": "Closeinterface"
+          },
+          "width": 40,
+          "height": 20,
+          "x": 132,
+          "y": 170
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_no",
+          "text": "no",
+          "isUndecorated": false,
+          "onClick": {
+            "name": "Closeinterface"
+          },
+          "width": 35,
+          "height": 20,
+          "x": 258,
+          "y": 170
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_it_often_happens_that_i_hear",
+          "text": {
+            "fixedValue": "It often happens that I hear"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 132,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_omeones_voices_in_extraneous",
+          "text": {
+            "fixedValue": "omeone's voices in extraneous"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 132,
+          "y": 62
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_noises_and_inanimate_objects_or",
+          "text": {
+            "fixedValue": "noises, and inanimate objects or"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 132,
+          "y": 80
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_shadows_seem_like_people",
+          "text": {
+            "fixedValue": "shadows seem like people."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 132,
+          "y": 98
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

@@ -1,0 +1,107 @@
+---- Minecraft Crash Report ----
+// You're mean.
+
+Time: 2025-03-28 01:10:08
+Description: Exception in server tick loop
+
+java.lang.IllegalArgumentException: Unsupported mob for MoveThroughVillageGoal
+	at net.minecraft.world.entity.ai.goal.MoveThroughVillageGoal.<init>(MoveThroughVillageGoal.java:46) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.world.entity.monster.Zombie.addBehaviourGoals(Zombie.java:105) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,xf:fml:forge:forge_method_redirector,re:classloading,xf:fml:forge:forge_method_redirector,pl:mixin:APP:pehkui.mixins.json:compat1201minus.EntityVehicleHeightOffsetMixin,pl:mixin:A}
+	at net.minecraft.world.entity.monster.Zombie.registerGoals(Zombie.java:100) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,xf:fml:forge:forge_method_redirector,re:classloading,xf:fml:forge:forge_method_redirector,pl:mixin:APP:pehkui.mixins.json:compat1201minus.EntityVehicleHeightOffsetMixin,pl:mixin:A}
+	at net.lixis9.eventjar.entity.Lixis9rageEntity.registerGoals(Lixis9rageEntity.java:70) ~[%23196!/:?] {re:classloading}
+	at net.minecraft.world.entity.Mob.<init>(Mob.java:135) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:pehkui.mixins.json:MobEntityMixin,pl:mixin:APP:pehkui.mixins.json:compat116plus.MobEntityMixin,pl:mixin:A}
+	at net.minecraft.world.entity.PathfinderMob.<init>(PathfinderMob.java:14) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:computing_frames,re:classloading,re:mixin}
+	at net.minecraft.world.entity.monster.Monster.<init>(Monster.java:31) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:computing_frames,re:mixin,re:classloading}
+	at net.minecraft.world.entity.monster.Zombie.<init>(Zombie.java:89) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,xf:fml:forge:forge_method_redirector,re:classloading,xf:fml:forge:forge_method_redirector,pl:mixin:APP:pehkui.mixins.json:compat1201minus.EntityVehicleHeightOffsetMixin,pl:mixin:A}
+	at net.lixis9.eventjar.entity.Lixis9rageEntity.<init>(Lixis9rageEntity.java:48) ~[%23196!/:?] {re:classloading}
+	at net.minecraft.world.entity.EntityType.create(EntityType.java:525) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,xf:fml:forge:forge_method_redirector,re:classloading,xf:fml:forge:forge_method_redirector}
+	at net.minecraft.world.entity.EntityType.create(EntityType.java:403) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,xf:fml:forge:forge_method_redirector,re:classloading,xf:fml:forge:forge_method_redirector}
+	at net.minecraft.world.entity.EntityType.spawn(EntityType.java:393) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,xf:fml:forge:forge_method_redirector,re:classloading,xf:fml:forge:forge_method_redirector}
+	at net.minecraft.world.entity.EntityType.spawn(EntityType.java:388) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,xf:fml:forge:forge_method_redirector,re:classloading,xf:fml:forge:forge_method_redirector}
+	at net.lixis9.eventjar.procedures.TestspawnProcedure.lambda$execute$1(TestspawnProcedure.java:27) ~[%23196!/:?] {re:classloading}
+	at net.lixis9.eventjar.EventjarMod.lambda$tick$2(EventjarMod.java:92) ~[%23196!/:?] {re:classloading}
+	at java.util.ArrayList.forEach(ArrayList.java:1511) ~[?:?] {}
+	at net.lixis9.eventjar.EventjarMod.tick(EventjarMod.java:92) ~[%23196!/:?] {re:classloading}
+	at net.lixis9.eventjar.__EventjarMod_tick_ServerTickEvent.invoke(.dynamic) ~[%23196!/:?] {re:classloading,pl:eventbus:B}
+	at net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:73) ~[eventbus-6.0.5.jar%23115!/:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:315) ~[eventbus-6.0.5.jar%23115!/:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:296) ~[eventbus-6.0.5.jar%23115!/:?] {}
+	at net.minecraftforge.event.ForgeEventFactory.onPostServerTick(ForgeEventFactory.java:950) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23190%23197!/:?] {re:classloading}
+	at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:835) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.client.server.IntegratedServer.tickServer(IntegratedServer.java:89) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:661) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:251) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at java.lang.Thread.run(Thread.java:840) ~[?:?] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- System Details --
+Details:
+	Minecraft Version: 1.20.1
+	Minecraft Version ID: 1.20.1
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 17.0.10, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 736905264 bytes (702 MiB) / 2491416576 bytes (2376 MiB) up to 8560574464 bytes (8164 MiB)
+	CPUs: 16
+	Processor Vendor: GenuineIntel
+	Processor Name: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+	Identifier: Intel64 Family 6 Model 167 Stepping 1
+	Microarchitecture: Rocket Lake
+	Frequency (GHz): 3.60
+	Number of physical packages: 1
+	Number of physical CPUs: 8
+	Number of logical CPUs: 16
+	Graphics card #0 name: NVIDIA GeForce RTX 3070
+	Graphics card #0 vendor: NVIDIA (0x10de)
+	Graphics card #0 VRAM (MB): 4095.00
+	Graphics card #0 deviceId: 0x2484
+	Graphics card #0 versionInfo: DriverVersion=32.0.15.6094
+	Memory slot #0 capacity (MB): 16384.00
+	Memory slot #0 clockSpeed (GHz): 3.20
+	Memory slot #0 type: DDR4
+	Memory slot #1 capacity (MB): 16384.00
+	Memory slot #1 clockSpeed (GHz): 3.20
+	Memory slot #1 type: DDR4
+	Virtual memory max (MB): 40786.63
+	Virtual memory used (MB): 34582.76
+	Swap memory total (MB): 8137.02
+	Swap memory used (MB): 412.94
+	JVM Flags: 1 total; -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump
+	Server Running: true
+	Player Count: 1 / 8; [ServerPlayer['Dev'/182, l='ServerLevel[Новый мир]', x=225.72, y=76.00, z=107.28]]
+	Data Packs: vanilla, mod:pehkui (incompatible), mod:eventjar, mod:mixinextras (incompatible), mod:forge
+	Enabled Feature Flags: minecraft:vanilla
+	World Generation: Experimental
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'forge'; Server brand changed to 'forge'
+	Launched Version: MOD_DEV
+	ModLauncher: 10.0.9+10.0.9+main.dcd20f30
+	ModLauncher launch target: forgeclientuserdev
+	ModLauncher naming: mcp
+	ModLauncher services: 
+		mixin-0.8.5.jar mixin PLUGINSERVICE 
+		eventbus-6.0.5.jar eventbus PLUGINSERVICE 
+		fmlloader-1.20.1-47.2.0.jar slf4jfixer PLUGINSERVICE 
+		fmlloader-1.20.1-47.2.0.jar object_holder_definalize PLUGINSERVICE 
+		fmlloader-1.20.1-47.2.0.jar runtime_enum_extender PLUGINSERVICE 
+		fmlloader-1.20.1-47.2.0.jar capability_token_subclass PLUGINSERVICE 
+		accesstransformers-8.0.4.jar accesstransformer PLUGINSERVICE 
+		fmlloader-1.20.1-47.2.0.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-10.0.9.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-10.0.9.jar fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		minecraft@1.0
+		lowcodefml@null
+		javafml@null
+	Mod List: 
+		forge-1.20.1-47.2.0_mapped_official_1.20.1.jar    |Minecraft                     |minecraft                     |1.20.1              |DONE      |Manifest: a1:d4:5e:04:4f:d3:d6:e0:7b:37:97:cf:77:b0:de:ad:4a:47:ce:8c:96:49:5f:0a:cf:8c:ae:b2:6d:4b:8a:3f
+		Pehkui-3.8.2-1.20.1-forge_mapped_official_1.20.1.j|Pehkui                        |pehkui                        |3.8.2+1.20.1-forge  |DONE      |Manifest: NOSIGNATURE
+		main                                              |Event.jar                     |eventjar                      |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		mixinextras-forge-0.3.6.jar                       |MixinExtras                   |mixinextras                   |0.3.6               |DONE      |Manifest: NOSIGNATURE
+		                                                  |Forge                         |forge                         |47.2.0              |DONE      |Manifest: NOSIGNATURE
+	Crash Report UUID: 07fbec0c-396b-4bde-aad6-fe6893b03ef9
+	FML: 47.2
+	Forge: net.minecraftforge:47.2.0

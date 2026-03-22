@@ -1,0 +1,31 @@
+{
+  "_fv": 60,
+  "_type": "overlay",
+  "definition": {
+    "priority": "NORMAL",
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "2d4b2a4a3ebecb6cd83e83d4a4a90cb6-photoroom.png",
+          "use1Xscale": false,
+          "anchorPoint": "TOP_CENTER",
+          "x": -1261,
+          "y": -1477
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "displayCondition": {
+      "name": "RedemptionPriShchielchkiePKM"
+    },
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

@@ -1,0 +1,25 @@
+package net.lixis9.eventjar.command;
+
+import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.lixis9.eventjar.procedures.CalculatorFindProcedure;
+
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
+public class CalculatorFindCommand {
+    @SubscribeEvent
+    public static void onRegisterCommands(ServerStartingEvent event) {
+        CommandDispatcher<CommandSourceStack> dispatcher = event.getServer().getCommands().getDispatcher();
+        dispatcher.register(
+            Commands.literal("calcfind")
+                .requires(cs -> cs.hasPermission(2))
+                .executes(ctx -> {
+                    CalculatorFindProcedure.execute();
+                    return 1;
+                })
+        );
+    }
+}

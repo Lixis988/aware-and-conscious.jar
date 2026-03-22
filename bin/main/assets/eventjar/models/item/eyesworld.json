@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "eventjar:item/45cf117a935715d7528897330b5c7ff1"
+  }
+}

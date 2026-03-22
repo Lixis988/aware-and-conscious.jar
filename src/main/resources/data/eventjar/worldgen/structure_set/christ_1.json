@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "eventjar:christ_1",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 9,
+    "separation": 7,
+    "salt": 2102006412
+  }
+}

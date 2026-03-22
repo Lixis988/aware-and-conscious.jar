@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{HH:mm:ss}] [%thread/%level] [%logger{36}]: %msg%n"/>
+            <Filters>
+                <!-- Block all moving piston warnings -->
+                <RegexFilter regex=".*moving_piston.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <!-- Block all block entity warnings -->
+                <RegexFilter regex=".*block entity.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <!-- Block LevelChunk warnings -->
+                <RegexFilter regex=".*LevelChunk.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <!-- Block WorldGenRegion warnings -->
+                <RegexFilter regex=".*WorldGenRegion.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <!-- Block Worker thread warnings -->
+                <RegexFilter regex=".*Worker-Main.*" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+        </Console>
+    </Appenders>
+    
+    <Loggers>
+        <!-- Completely turn off problematic loggers -->
+        <Logger level="OFF" name="net.minecraft.world.level.chunk.LevelChunk" additivity="false"/>
+        <Logger level="OFF" name="net.minecraft.world.level.WorldGenRegion" additivity="false"/>
+        <Logger level="OFF" name="net.minecraft.world.level" additivity="false"/>
+        
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

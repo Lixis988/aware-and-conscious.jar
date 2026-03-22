@@ -1,0 +1,170 @@
+---- Minecraft Crash Report ----
+// Surprise! Haha. Well, this is awkward.
+
+Time: 2025-04-10 19:10:51
+Description: Exception ticking world
+
+java.lang.LinkageError: loader constraint violation: loader 'MC-BOOTSTRAP' @cd3fee8 wants to load interface org.apache.logging.log4j.util.MessageSupplier. (org.apache.logging.log4j.util.MessageSupplier is in module org.apache.logging.log4j@2.19.0 of loader 'MC-BOOTSTRAP' @cd3fee8, parent loader 'bootstrap')
+	at net.minecraftforge.eventbus.EventBus.handleException(EventBus.java:329) ~[eventbus-6.0.5.jar%23115!/:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:320) ~[eventbus-6.0.5.jar%23115!/:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:296) ~[eventbus-6.0.5.jar%23115!/:?] {}
+	at net.minecraftforge.event.ForgeEventFactory.onNeighborNotify(ForgeEventFactory.java:175) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23190%23197!/:?] {re:classloading}
+	at net.minecraft.server.level.ServerLevel.updateNeighborsAt(ServerLevel.java:975) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:pehkui.mixins.json:compat117plus.ServerWorldMixin,pl:mixin:A}
+	at net.minecraft.server.level.ServerLevel.blockUpdated(ServerLevel.java:1348) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:pehkui.mixins.json:compat117plus.ServerWorldMixin,pl:mixin:A}
+	at net.minecraft.world.level.Level.markAndNotifyBlock(Level.java:251) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.level.Level.setBlock(Level.java:227) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.level.Level.setBlock(Level.java:196) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.level.material.FlowingFluid.spreadTo(FlowingFluid.java:253) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.world.level.material.FlowingFluid.spreadToSides(FlowingFluid.java:146) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.world.level.material.FlowingFluid.spread(FlowingFluid.java:125) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.world.level.material.FlowingFluid.tick(FlowingFluid.java:418) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.world.level.material.FluidState.tick(FluidState.java:76) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.world.level.chunk.LevelChunk.postProcessGeneration(LevelChunk.java:501) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,re:mixin}
+	at net.minecraft.server.level.ChunkMap.lambda$prepareTickingChunk$41(ChunkMap.java:747) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,re:classloading,pl:mixin:APP:pehkui.mixins.json:compat1201minus.compat116plus.ThreadedAnvilChunkStorageMixin,pl:mixin:A}
+	at com.mojang.datafixers.util.Either$Left.ifLeft(Either.java:43) ~[datafixerupper-6.0.8.jar%23136!/:?] {}
+	at net.minecraft.server.level.ChunkMap.lambda$prepareTickingChunk$42(ChunkMap.java:746) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,re:classloading,pl:mixin:APP:pehkui.mixins.json:compat1201minus.compat116plus.ThreadedAnvilChunkStorageMixin,pl:mixin:A}
+	at java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:646) ~[?:?] {}
+	at java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?] {}
+	at net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:156) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
+	at net.minecraft.server.level.ServerChunkCache$MainThreadExecutor.doRunTask(ServerChunkCache.java:541) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:130) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
+	at net.minecraft.server.level.ServerChunkCache$MainThreadExecutor.pollTask(ServerChunkCache.java:549) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.server.level.ServerChunkCache.pollTask(ServerChunkCache.java:269) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:pehkui.mixins.json:compat1201minus.compat117plus.ServerChunkManagerMixin,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:758) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:747) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:139) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.waitUntilNextTick(MinecraftServer.java:733) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.prepareLevels(MinecraftServer.java:459) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.loadLevel(MinecraftServer.java:310) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.client.server.IntegratedServer.initServer(IntegratedServer.java:63) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:634) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:251) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at java.lang.Thread.run(Thread.java:840) ~[?:?] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at net.minecraftforge.eventbus.EventBus.handleException(EventBus.java:329) ~[eventbus-6.0.5.jar%23115!/:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:320) ~[eventbus-6.0.5.jar%23115!/:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:296) ~[eventbus-6.0.5.jar%23115!/:?] {}
+	at net.minecraftforge.event.ForgeEventFactory.onNeighborNotify(ForgeEventFactory.java:175) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23190%23197!/:?] {re:classloading}
+	at net.minecraft.server.level.ServerLevel.updateNeighborsAt(ServerLevel.java:975) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:pehkui.mixins.json:compat117plus.ServerWorldMixin,pl:mixin:A}
+	at net.minecraft.server.level.ServerLevel.blockUpdated(ServerLevel.java:1348) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:pehkui.mixins.json:compat117plus.ServerWorldMixin,pl:mixin:A}
+	at net.minecraft.world.level.Level.markAndNotifyBlock(Level.java:251) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.level.Level.setBlock(Level.java:227) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.level.Level.setBlock(Level.java:196) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.level.material.FlowingFluid.spreadTo(FlowingFluid.java:253) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.world.level.material.FlowingFluid.spreadToSides(FlowingFluid.java:146) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.world.level.material.FlowingFluid.spread(FlowingFluid.java:125) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.world.level.material.FlowingFluid.tick(FlowingFluid.java:418) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.world.level.material.FluidState.tick(FluidState.java:76) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.world.level.chunk.LevelChunk.postProcessGeneration(LevelChunk.java:501) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,re:mixin}
+	at net.minecraft.server.level.ChunkMap.lambda$prepareTickingChunk$41(ChunkMap.java:747) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,re:classloading,pl:mixin:APP:pehkui.mixins.json:compat1201minus.compat116plus.ThreadedAnvilChunkStorageMixin,pl:mixin:A}
+	at com.mojang.datafixers.util.Either$Left.ifLeft(Either.java:43) ~[datafixerupper-6.0.8.jar%23136!/:?] {}
+	at net.minecraft.server.level.ChunkMap.lambda$prepareTickingChunk$42(ChunkMap.java:746) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,re:classloading,pl:mixin:APP:pehkui.mixins.json:compat1201minus.compat116plus.ThreadedAnvilChunkStorageMixin,pl:mixin:A}
+	at java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:646) ~[?:?] {}
+	at java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?] {}
+	at net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:156) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
+	at net.minecraft.server.level.ServerChunkCache$MainThreadExecutor.doRunTask(ServerChunkCache.java:541) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:130) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
+	at net.minecraft.server.level.ServerChunkCache$MainThreadExecutor.pollTask(ServerChunkCache.java:549) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading}
+	at net.minecraft.server.level.ServerChunkCache.pollTask(ServerChunkCache.java:269) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:pehkui.mixins.json:compat1201minus.compat117plus.ServerChunkManagerMixin,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:758) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:747) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:139) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.waitUntilNextTick(MinecraftServer.java:733) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+-- Affected level --
+Details:
+	All players: 0 total; []
+	Chunk stats: 2209
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (16,65,-16), Section: (at 0,1,0 in 1,4,-1; chunk contains blocks 16,-64,-16 to 31,319,-1), Region: (0,-1; contains chunks 0,-32 to 31,-1, blocks 0,-64,-512 to 511,319,-1)
+	Level time: 1 game time, 1 day time
+	Level name: Новый мир
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+	Level weather: Rain time: 154283 (now: false), thunder time: 172752 (now: false)
+	Known server brands: forge
+	Removed feature flags: 
+	Level was modded: true
+	Level storage version: 0x04ABD - Anvil
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:896) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:814) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.client.server.IntegratedServer.tickServer(IntegratedServer.java:89) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:661) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:251) ~[forge-1.20.1-47.2.0_mapped_official_1.20.1.jar%23191!/:?] {re:classloading,pl:accesstransformer:B}
+	at java.lang.Thread.run(Thread.java:840) ~[?:?] {}
+
+
+-- System Details --
+Details:
+	Minecraft Version: 1.20.1
+	Minecraft Version ID: 1.20.1
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 17.0.10, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 1417021840 bytes (1351 MiB) / 2894069760 bytes (2760 MiB) up to 8560574464 bytes (8164 MiB)
+	CPUs: 16
+	Processor Vendor: GenuineIntel
+	Processor Name: 11th Gen Intel(R) Core(TM) i7-11700KF @ 3.60GHz
+	Identifier: Intel64 Family 6 Model 167 Stepping 1
+	Microarchitecture: Rocket Lake
+	Frequency (GHz): 3.60
+	Number of physical packages: 1
+	Number of physical CPUs: 8
+	Number of logical CPUs: 16
+	Graphics card #0 name: NVIDIA GeForce RTX 3070
+	Graphics card #0 vendor: NVIDIA (0x10de)
+	Graphics card #0 VRAM (MB): 4095.00
+	Graphics card #0 deviceId: 0x2484
+	Graphics card #0 versionInfo: DriverVersion=32.0.15.6094
+	Memory slot #0 capacity (MB): 16384.00
+	Memory slot #0 clockSpeed (GHz): 3.20
+	Memory slot #0 type: DDR4
+	Memory slot #1 capacity (MB): 16384.00
+	Memory slot #1 clockSpeed (GHz): 3.20
+	Memory slot #1 type: DDR4
+	Virtual memory max (MB): 39817.62
+	Virtual memory used (MB): 30199.52
+	Swap memory total (MB): 7168.00
+	Swap memory used (MB): 189.15
+	JVM Flags: 1 total; -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump
+	Server Running: true
+	Player Count: 0 / 8; []
+	Data Packs: vanilla, mod:pehkui (incompatible), mod:eventjar, mod:mixinextras (incompatible), mod:forge
+	Enabled Feature Flags: minecraft:vanilla
+	World Generation: Experimental
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'forge'; Server brand changed to 'forge'
+	Launched Version: MOD_DEV
+	ModLauncher: 10.0.9+10.0.9+main.dcd20f30
+	ModLauncher launch target: forgeclientuserdev
+	ModLauncher naming: mcp
+	ModLauncher services: 
+		mixin-0.8.5.jar mixin PLUGINSERVICE 
+		eventbus-6.0.5.jar eventbus PLUGINSERVICE 
+		fmlloader-1.20.1-47.2.0.jar slf4jfixer PLUGINSERVICE 
+		fmlloader-1.20.1-47.2.0.jar object_holder_definalize PLUGINSERVICE 
+		fmlloader-1.20.1-47.2.0.jar runtime_enum_extender PLUGINSERVICE 
+		fmlloader-1.20.1-47.2.0.jar capability_token_subclass PLUGINSERVICE 
+		accesstransformers-8.0.4.jar accesstransformer PLUGINSERVICE 
+		fmlloader-1.20.1-47.2.0.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-10.0.9.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-10.0.9.jar fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		minecraft@1.0
+		lowcodefml@null
+		javafml@null
+	Mod List: 
+		forge-1.20.1-47.2.0_mapped_official_1.20.1.jar    |Minecraft                     |minecraft                     |1.20.1              |DONE      |Manifest: a1:d4:5e:04:4f:d3:d6:e0:7b:37:97:cf:77:b0:de:ad:4a:47:ce:8c:96:49:5f:0a:cf:8c:ae:b2:6d:4b:8a:3f
+		Pehkui-3.8.2-1.20.1-forge_mapped_official_1.20.1.j|Pehkui                        |pehkui                        |3.8.2+1.20.1-forge  |DONE      |Manifest: NOSIGNATURE
+		main                                              |Event.jar                     |eventjar                      |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		mixinextras-forge-0.3.6.jar                       |MixinExtras                   |mixinextras                   |0.3.6               |DONE      |Manifest: NOSIGNATURE
+		                                                  |Forge                         |forge                         |47.2.0              |DONE      |Manifest: NOSIGNATURE
+	Crash Report UUID: 1f7f4923-b3b8-453b-9e26-7efa145e0078
+	FML: 47.2
+	Forge: net.minecraftforge:47.2.0

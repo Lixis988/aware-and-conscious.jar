@@ -1,0 +1,41 @@
+{
+  "_fv": 60,
+  "_type": "tool",
+  "definition": {
+    "toolType": "Sword",
+    "renderType": 0,
+    "blockingRenderType": 0,
+    "texture": "hammer-png-image-transparent-bac",
+    "customModelName": "Normal",
+    "blockingModelName": "Normal blocking",
+    "name": "Hammer",
+    "specialInformation": {
+      "fixedValue": [
+        "psychopomp?"
+      ]
+    },
+    "creativeTab": {
+      "value": "TOOLS"
+    },
+    "harvestLevel": 1,
+    "efficiency": 4.0,
+    "attackSpeed": 1.0,
+    "enchantability": 2,
+    "damageVsEntity": 1.0,
+    "usageCount": 0,
+    "blocksAffected": [],
+    "glowCondition": {
+      "fixedValue": false
+    },
+    "repairItems": [],
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "onEntityHitWith": {
+      "name": "HammerPriUdariePoSushchnostiInstrumientom"
+    },
+    "onEntitySwing": {
+      "name": "HammerPriVzmakhieSushchnostiPriedmietom"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="Custom license"
+
+[[mods]]
+modId="eventjar"
+version="1.0.0"
+displayName="Event.jar"
+displayURL="https://www.donationalerts.com/r/dj_univxrsel"
+credits="<meatboy> i am the god"
+authors="Lixis9"
+description="you are godless"
+
+# Start of user code block mod configuration
+# End of user code block mod configuration
+
+[[dependencies.eventjar]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1]"
+    ordering="NONE"
+    side="BOTH"
+
+
+

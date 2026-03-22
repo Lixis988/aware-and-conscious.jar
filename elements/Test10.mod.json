@@ -1,0 +1,97 @@
+{
+  "_fv": 60,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "button",
+        "data": {
+          "name": "button_yes",
+          "text": "yes",
+          "isUndecorated": false,
+          "onClick": {
+            "name": "Closeinterface"
+          },
+          "width": 40,
+          "height": 20,
+          "x": 132,
+          "y": 170
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_no",
+          "text": "no",
+          "isUndecorated": false,
+          "onClick": {
+            "name": "Closeinterface"
+          },
+          "width": 35,
+          "height": 20,
+          "x": 258,
+          "y": 170
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_i_know_that_people_pay_attention",
+          "text": {
+            "fixedValue": "I know that people pay attention"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 132,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_to_me_when_i_go_to_a_buffet",
+          "text": {
+            "fixedValue": "to me when I go to a buffet,"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 132,
+          "y": 62
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_a_cafeteria_or_to_the_cinema",
+          "text": {
+            "fixedValue": "a cafeteria or to the cinema."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 132,
+          "y": 80
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

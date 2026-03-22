@@ -1,0 +1,14 @@
+{
+  "targets": [
+    "minecraft:main",
+    "minecraft:final"
+  ],
+  "passes": [
+    {
+      "name": "final",
+      "intarget": "minecraft:main",
+      "outtarget": "minecraft:final",
+      "program": "eventjar:shaders/post/final"
+    }
+  ]
+}

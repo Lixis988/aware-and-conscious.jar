@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "eventjar:blocks/tastyblock",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "eventjar:t_astyblock_122"
+        }
+      ]
+    }
+  ]
+}

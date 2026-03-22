@@ -1,0 +1,57 @@
+{
+  "has_precipitation": true,
+  "temperature": 0.5,
+  "downfall": 0.5,
+  "effects": {
+    "ambient_sound": "eventjar:breath",
+    "mood_sound": {
+      "sound": "eventjar:godisloveumusic",
+      "tick_delay": 6000,
+      "offset": 8,
+      "block_search_extent": 2
+    },
+    "additions_sound": {
+      "sound": "eventjar:godisloveumusic",
+      "tick_chance": 0.0111
+    },
+    "music": {
+      "sound": "eventjar:godisloveumusic",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": true
+    },
+    "foliage_color": 10387789,
+    "grass_color": 9470285,
+    "sky_color": -16777216,
+    "fog_color": -16777216,
+    "water_color": -16777216,
+    "water_fog_color": -16777216
+  },
+  "spawners": {
+    "monster": [],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "eventjar:wierdness_tree"
+    ],
+    []
+  ]
+}

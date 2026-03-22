@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "eventjar:block/meeettt_portal_ew"
+    },
+    "axis=x": {
+      "model": "eventjar:block/meeettt_portal_ns"
+    }
+  }
+}

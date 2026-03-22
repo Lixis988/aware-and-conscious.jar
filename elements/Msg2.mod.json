@@ -1,0 +1,7 @@
+{
+  "_fv": 60,
+  "_type": "procedure",
+  "definition": {
+    "procedurexml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"event_trigger\" deletable=\"false\" x=\"40\" y=\"40\"><field name=\"trigger\">chat_sent</field><next><block type=\"controls_if\"><value name=\"IF0\"><block type=\"text_contains\"><value name=\"text\"><block type=\"custom_dependency_string\"><field name=\"NAME\">text</field></block></value><value name=\"contains\"><block type=\"text\"><field name=\"TEXT\">/spawnpoin</field></block></value></block></value><statement name=\"DO0\"><block type=\"world_send_chat\"><value name=\"text\"><block type=\"text\"><field name=\"TEXT\">CREATE  TABLE IF NOT EXISTS `Alternative_Pathways`.`Clients_has_Staff` (   `Clients_Case_Number` INT NOT NULL ,   `Staff_Emp_ID` INT NOT NULL ,   PRIMARY KEY (`Clients_Case_Number`, `Staff_Emp_ID`) ,   INDEX `fk_Clients_has_Staff_Staff1_idx` (`Staff_Emp_ID` ASC) ,   INDEX `fk_Clients_has_Staff_Clients_idx` (`Clients_Case_Number` ASC) ,   CONSTRAINT `fk_Clients_has_Staff_Clients`     FOREIGN KEY (`Clients_Case_Number` )     REFERENCES `Alternative_Pathways`.`Clients` (`Case_Number` )     ON DELETE NO ACTION     ON UPDATE NO ACTION,   CONSTRAINT `fk_Clients_has_Staff_Staff1`     FOREIGN KEY (`Staff_Emp_ID` )     REFERENCES `Alternative_Pathways`.`Staff` (`Emp_ID` )     ON DELETE NO ACTION     ON UPDATE NO ACTION) ENGINE = InnoDB</field></block></value></block></statement></block></next></block></xml>"
+  }
+}
