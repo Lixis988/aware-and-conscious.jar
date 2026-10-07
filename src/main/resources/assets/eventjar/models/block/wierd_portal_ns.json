@@ -1,0 +1,41 @@
+{
+  "textures": {
+    "particle": "eventjar:block/7f2227a617ba53547a2bf987fba5e559",
+    "portal": "eventjar:block/7f2227a617ba53547a2bf987fba5e559"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        6
+      ],
+      "to": [
+        16,
+        16,
+        10
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#portal"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#portal"
+        }
+      }
+    }
+  ],
+  "render_type": "translucent"
+}

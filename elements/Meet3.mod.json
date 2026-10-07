@@ -1,0 +1,21 @@
+{
+  "_fv": 60,
+  "_type": "particle",
+  "definition": {
+    "texture": "gratis-png-intestino-delgado-protesis-maquillaje-efectos-especiales-tracto-gastrointestinal-labio-photoroom.png",
+    "animate": false,
+    "frameDuration": 4,
+    "width": 0.1,
+    "height": 0.4,
+    "scale": 2.0,
+    "speedFactor": 1.0,
+    "gravity": 10.0,
+    "maxAge": 7,
+    "maxAgeDiff": 0,
+    "angularVelocity": 0.0,
+    "angularAcceleration": 0.0,
+    "canCollide": true,
+    "alwaysShow": false,
+    "renderType": "TRANSLUCENT"
+  }
+}

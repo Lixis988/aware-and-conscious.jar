@@ -1,0 +1,12 @@
+{
+	"type": "outofbound:maze",
+	"generator": {
+		"type": "outofbound:maze",
+		"biome_source": {
+			"type": "minecraft:fixed",
+			"biome": "minecraft:the_void"
+		},
+		"seed": 0,
+		"dimension_index": 0
+	}
+}

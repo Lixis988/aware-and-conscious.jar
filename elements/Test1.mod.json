@@ -1,0 +1,112 @@
+{
+  "_fv": 60,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "button",
+        "data": {
+          "name": "button_yes",
+          "text": "yes",
+          "isUndecorated": false,
+          "onClick": {
+            "name": "Closeinterface"
+          },
+          "width": 40,
+          "height": 20,
+          "x": 141,
+          "y": 161
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_no",
+          "text": "no",
+          "isUndecorated": false,
+          "onClick": {
+            "name": "Closeinterface"
+          },
+          "width": 35,
+          "height": 20,
+          "x": 249,
+          "y": 161
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_sometimes_it_seems_to_me",
+          "text": {
+            "fixedValue": "Sometimes it seems to me"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 132,
+          "y": 44
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_what_you_saw_on_tv_or",
+          "text": {
+            "fixedValue": "what you saw on TV or"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 132,
+          "y": 62
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_read_in_the_newspapers",
+          "text": {
+            "fixedValue": "read in the newspapers"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 132,
+          "y": 80
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_has_a_special_meaning_for_me",
+          "text": {
+            "fixedValue": "has a special meaning for me."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 132,
+          "y": 98
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": true
+    }
+  }
+}

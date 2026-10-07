@@ -1,0 +1,13 @@
+{
+  "targets": [
+    "minecraft:main"
+  ],
+  "passes": [
+    {
+      "name": "noise",
+      "intarget": "minecraft:main",
+      "outtarget": "minecraft:main",
+      "shader": "shaders/post/noise.frag"
+    }
+  ]
+}

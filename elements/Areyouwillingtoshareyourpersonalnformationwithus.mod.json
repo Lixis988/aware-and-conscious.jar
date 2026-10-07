@@ -1,0 +1,127 @@
+{
+  "_fv": 60,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": true,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "name": "label_an_xia_que_ding_ji_biao_shi_nin_tong_yi_fen_fa_he_chu_shou_nin_zai_wan_ci_mo_zu_shi_shou_ji_de_ge_ren_zi_xun",
+          "text": {
+            "fixedValue": "By clicking \"OK\", you "
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 133,
+          "y": 46
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_agree_to_the_distribution_and_sa",
+          "text": {
+            "fixedValue": "agree to the distribution"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 133,
+          "y": 61
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_by_clicking_ok_you_agree_to",
+          "text": {
+            "fixedValue": "and sale of your personal "
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 133,
+          "y": 76
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_information_collected_while_play",
+          "text": {
+            "fixedValue": "information collected while"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 133,
+          "y": 90
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_laying_this_mod",
+          "text": {
+            "fixedValue": "playing this mod."
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 133,
+          "y": 106
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_click_the_button_to_confirm",
+          "text": {
+            "fixedValue": "Click the button to confirm"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 138,
+          "y": 149
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "name": "button_kill_yourself",
+          "text": "KILL YOURSELF",
+          "isUndecorated": false,
+          "onClick": {
+            "name": "KillYourself"
+          },
+          "width": 93,
+          "height": 20,
+          "x": 168,
+          "y": 170
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

@@ -1,0 +1,302 @@
+{
+  "_author": "Lixis9 (Lev Glebovich Belyakov)",
+  "_ownership": "Mod created by Lixis9 (Lev Glebovich Belyakov). If this mod is posted under a different name, it has been stolen.",
+  "_copyright": "Mod created by Lixis9 (Lev Glebovich Belyakov). If this mod is posted under a different name, it has been stolen.",
+  "noise": {
+    "sounds": [
+      {
+        "name": "outofbound:noise",
+        "stream": true
+      }
+    ],
+    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+  },
+  "noises": {
+    "sounds": [
+      {
+        "name": "outofbound:noises",
+        "stream": true
+      }
+    ],
+    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+  },
+  "noise2": {
+    "sounds": [
+      {
+        "name": "outofbound:noise2",
+        "stream": true
+      }
+    ],
+    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+  },
+  "noise3": {
+    "sounds": [
+      {
+        "name": "outofbound:noise3",
+        "stream": true
+      }
+    ],
+    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+  },
+  "noise4": {
+    "sounds": [
+      {
+        "name": "outofbound:noise4",
+        "stream": true
+      }
+    ],
+    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+  },
+  "noise5": {
+    "sounds": [
+      {
+        "name": "outofbound:noise5",
+        "stream": true
+      }
+    ],
+    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+  },
+  "noise6": {
+    "sounds": [
+      {
+        "name": "outofbound:noise6",
+        "stream": true
+      }
+    ],
+    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+  },
+  "noise7": {
+    "sounds": [
+      {
+        "name": "outofbound:noise7",
+        "stream": true
+      }
+    ],
+    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+  },
+  "noise8": {
+    "sounds": [
+      {
+        "name": "outofbound:noise8",
+        "stream": true
+      }
+    ]
+  },
+  "noise9": {
+    "sounds": [
+      {
+        "name": "outofbound:noise9",
+        "stream": true
+      }
+    ]
+  },
+  "noise10": {
+    "sounds": [
+      {
+        "name": "outofbound:noise10",
+        "stream": true
+      }
+    ]
+  },
+  "noise11": {
+    "sounds": [
+      {
+        "name": "outofbound:noise11",
+        "stream": true
+      }
+    ]
+  },
+  "noise12": {
+    "sounds": [
+      {
+        "name": "outofbound:noise12",
+        "stream": true
+      }
+    ]
+  },
+  "noise13": {
+    "sounds": [
+      {
+        "name": "outofbound:noise13",
+        "stream": true
+      }
+    ]
+  },
+  "step1": {
+    "sounds": [
+      {
+        "name": "outofbound:step1",
+        "stream": false
+      }
+    ]
+  },
+  "step2": {
+    "sounds": [
+      {
+        "name": "outofbound:step2",
+        "stream": false
+      }
+    ]
+  },
+  "chase": {
+    "sounds": [
+      {
+        "name": "outofbound:chase",
+        "stream": true
+      }
+    ]
+  },
+  "ambient_noise": {
+    "sounds": [
+      {
+        "name": "outofbound:noises",
+        "stream": false
+      },
+      {
+        "name": "outofbound:noise2",
+        "stream": false
+      },
+      {
+        "name": "outofbound:noise3",
+        "stream": false
+      },
+      {
+        "name": "outofbound:noise4",
+        "stream": false
+      },
+      {
+        "name": "outofbound:noise5",
+        "stream": false
+      },
+      {
+        "name": "outofbound:noise6",
+        "stream": false
+      },
+      {
+        "name": "outofbound:noise7",
+        "stream": false
+      },
+      {
+        "name": "outofbound:noise8",
+        "stream": false
+      },
+      {
+        "name": "outofbound:noise9",
+        "stream": false
+      },
+      {
+        "name": "outofbound:noise10",
+        "stream": false
+      },
+      {
+        "name": "outofbound:noise11",
+        "stream": false
+      },
+      {
+        "name": "outofbound:noise12",
+        "stream": false
+      },
+      {
+        "name": "outofbound:noise13",
+        "stream": false
+      }
+    ]
+  },
+  "random_event": {
+    "sounds": [
+      {
+        "name": "outofbound:randomsound",
+        "stream": false
+      },
+      {
+        "name": "outofbound:rndsound",
+        "stream": false
+      },
+      {
+        "name": "outofbound:rndsound2",
+        "stream": false
+      },
+      {
+        "name": "outofbound:randomwiersscreems",
+        "stream": false
+      }
+    ]
+  },
+  "random_voice": {
+    "subtitle": "subtitles.outofbound.random_voice",
+    "sounds": [
+      {
+        "name": "outofbound:random_voice_1",
+        "stream": false
+      },
+      {
+        "name": "outofbound:random_voice_2",
+        "stream": false
+      },
+      {
+        "name": "outofbound:random_voice_3",
+        "stream": false
+      },
+      {
+        "name": "outofbound:random_voice_4",
+        "stream": false
+      },
+      {
+        "name": "outofbound:random_voice_5",
+        "stream": false
+      },
+      {
+        "name": "outofbound:random_voice_6",
+        "stream": false
+      },
+      {
+        "name": "outofbound:random_voice_7",
+        "stream": false
+      },
+      {
+        "name": "outofbound:random_voice_8",
+        "stream": false
+      },
+      {
+        "name": "outofbound:random_voice_9",
+        "stream": false
+      },
+      {
+        "name": "outofbound:random_voice_10",
+        "stream": false
+      },
+      {
+        "name": "outofbound:random_voice_11",
+        "stream": false
+      },
+      {
+        "name": "outofbound:random_voice_12",
+        "stream": false
+      },
+      {
+        "name": "outofbound:random_voice_13",
+        "stream": false
+      }
+    ]
+  },
+  "distant_step": {
+    "sounds": [
+      {
+        "name": "outofbound:step1",
+        "stream": false
+      },
+      {
+        "name": "outofbound:step2",
+        "stream": false
+      }
+    ]
+  },
+  "main_menu": {
+    "sounds": [
+      {
+        "name": "outofbound:main_menu",
+        "stream": true
+      }
+    ]
+  }
+}

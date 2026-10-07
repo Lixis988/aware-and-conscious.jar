@@ -1,0 +1,224 @@
+{
+  "_fv": 60,
+  "_type": "overlay",
+  "definition": {
+    "priority": "NORMAL",
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "name": "label_patience",
+          "text": {
+            "fixedValue": "patience"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "anchorPoint": "TOP_LEFT",
+          "x": 4,
+          "y": 3
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_10",
+          "text": {
+            "fixedValue": "10"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Rasperidone1"
+          },
+          "anchorPoint": "TOP_LEFT",
+          "x": 48,
+          "y": 3
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_9",
+          "text": {
+            "fixedValue": "9"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Risperidone2"
+          },
+          "anchorPoint": "TOP_LEFT",
+          "x": 60,
+          "y": 3
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_8",
+          "text": {
+            "fixedValue": "8"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Risperidone3"
+          },
+          "anchorPoint": "TOP_LEFT",
+          "x": 67,
+          "y": 3
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_7",
+          "text": {
+            "fixedValue": "7"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Risperidone4"
+          },
+          "anchorPoint": "TOP_LEFT",
+          "x": 73,
+          "y": 3
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_6",
+          "text": {
+            "fixedValue": "6"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Risperidone5"
+          },
+          "anchorPoint": "TOP_LEFT",
+          "x": 80,
+          "y": 3
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_5",
+          "text": {
+            "fixedValue": "5"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Risperidone6"
+          },
+          "anchorPoint": "TOP_LEFT",
+          "x": 87,
+          "y": 3
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_4",
+          "text": {
+            "fixedValue": "4"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Risperidone7"
+          },
+          "anchorPoint": "TOP_LEFT",
+          "x": 93,
+          "y": 3
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_3",
+          "text": {
+            "fixedValue": "3"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Risperidone8"
+          },
+          "anchorPoint": "TOP_LEFT",
+          "x": 100,
+          "y": 3
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_2",
+          "text": {
+            "fixedValue": "2"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Risperidone9"
+          },
+          "anchorPoint": "TOP_LEFT",
+          "x": 107,
+          "y": 3
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_1",
+          "text": {
+            "fixedValue": "1"
+          },
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "Risperidone10"
+          },
+          "anchorPoint": "TOP_LEFT",
+          "x": 114,
+          "y": 3
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

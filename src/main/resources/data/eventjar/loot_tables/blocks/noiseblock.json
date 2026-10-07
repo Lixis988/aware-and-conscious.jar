@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "eventjar:blocks/noiseblock",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "eventjar:noiseblock"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "_fv": 60,
+  "_type": "potioneffect",
+  "definition": {
+    "effectName": "сonscience",
+    "icon": "sprite-0001.png",
+    "color": {
+      "value": -16777216,
+      "falpha": 0.0
+    },
+    "isInstant": false,
+    "isBad": true,
+    "isBenefitical": false,
+    "renderStatusInInventory": true,
+    "renderStatusInHUD": true,
+    "onStarted": {
+      "name": "Alleyesonyou"
+    },
+    "onExpired": {
+      "name": "StopFollowTask"
+    }
+  }
+}

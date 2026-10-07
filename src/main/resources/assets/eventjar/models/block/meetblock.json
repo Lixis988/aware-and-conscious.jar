@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "eventjar:block/24344ea9bfeb2f2c7e91f39f6026cdbf",
+    "up": "eventjar:block/24344ea9bfeb2f2c7e91f39f6026cdbf",
+    "north": "eventjar:block/24344ea9bfeb2f2c7e91f39f6026cdbf",
+    "east": "eventjar:block/24344ea9bfeb2f2c7e91f39f6026cdbf",
+    "south": "eventjar:block/24344ea9bfeb2f2c7e91f39f6026cdbf",
+    "west": "eventjar:block/24344ea9bfeb2f2c7e91f39f6026cdbf",
+    "particle": "eventjar:block/24344ea9bfeb2f2c7e91f39f6026cdbf"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,169 @@
+buildscript {
+    repositories {
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.spongepowered:mixingradle:0.7.+'
+    }
+}
+
+plugins {
+    id 'eclipse'
+    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+}
+
+apply plugin: 'org.spongepowered.mixin'
+
+version = '2.0'
+group = 'net.lixis9.eventjar'
+archivesBaseName = 'eventjar'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    copyIdeResources = true
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            mods {
+                eventjar {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            mods {
+                eventjar {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+mixin {
+
+    add sourceSets.main, 'eventjar.refmap.json'
+    config 'mixins.eventjar.json'
+    config 'outofbound.mixins.json'
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.2.0'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    minecraftLibrary 'de.kherud:llama:3.4.0'
+    jarJar(group: 'de.kherud', name: 'llama', version: '[3.4.0,3.5.0)') {
+        jarJar.pin(it, '3.4.0')
+    }
+}
+
+jarJar.enable()
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes(
+                'Implementation-Title': 'Event.jar',
+                'Implementation-Vendor': 'Lixis9',
+                'Implementation-Version': project.version,
+                'Specification-Title': 'eventjar',
+                'Specification-Vendor': 'Lixis9'
+        )
+    }
+}
+
+apply from: 'mcreator.gradle'
+
+tasks.register('copyMixinRefmap') {
+    dependsOn tasks.named('compileJava')
+    def tmp = layout.buildDirectory.dir('tmp/compileJava')
+    def outDir = layout.buildDirectory.dir('generated/mixinRefmap')
+    inputs.files(
+            tmp.map { it.file('eventjar.refmap.json') },
+            tmp.map { it.file('compileJava-refmap.json') }
+    ).skipWhenEmpty()
+    outputs.dir(outDir)
+    doLast {
+        def tmpFile = tmp.get().asFile
+        def dest = outDir.get().asFile
+        dest.mkdirs()
+        def named = new File(tmpFile, 'eventjar.refmap.json')
+        def fallback = new File(tmpFile, 'compileJava-refmap.json')
+        def src = named.exists() ? named : (fallback.exists() ? fallback : null)
+        if (src == null) {
+            throw new GradleException("Mixin refmap missing under ${tmpFile}")
+        }
+        copy {
+            from src
+            into dest
+            rename { 'eventjar.refmap.json' }
+        }
+
+        copy {
+            from src
+            into dest
+            rename { 'outofbound.refmap.json' }
+        }
+    }
+}
+
+tasks.register('auditMixinRefmap', Exec) {
+    group = 'verification'
+    dependsOn 'copyMixinRefmap'
+    workingDir = projectDir
+    commandLine 'python', 'tools/audit_mixin_refmap.py'
+}
+
+tasks.named('jar', Jar).configure {
+    dependsOn 'copyMixinRefmap'
+    dependsOn 'auditMixinRefmap'
+    from(layout.buildDirectory.dir('generated/mixinRefmap')) {
+        include '*.refmap.json'
+    }
+}
+
+afterEvaluate {
+    tasks.matching { it.name == 'jarJar' }.configureEach {
+        dependsOn 'copyMixinRefmap'
+        dependsOn 'auditMixinRefmap'
+
+        dependsOn 'jar'
+    }
+    tasks.matching { it.name == 'runClient' || it.name == 'runServer' }.configureEach {
+        dependsOn 'copyMixinRefmap'
+        doFirst {
+            copy {
+                from layout.buildDirectory.dir('generated/mixinRefmap')
+                into layout.buildDirectory.dir('resources/main')
+                include '*.refmap.json'
+            }
+        }
+    }
+}

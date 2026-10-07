@@ -1,0 +1,38 @@
+{
+  "_fv": 60,
+  "_type": "tool",
+  "definition": {
+    "toolType": "Sword",
+    "renderType": 0,
+    "blockingRenderType": 0,
+    "texture": "fayfyaafyafyfyafay",
+    "customModelName": "Normal",
+    "blockingModelName": "Normal blocking",
+    "name": "Redemption",
+    "specialInformation": {
+      "fixedValue": [
+        "atone for one's sin"
+      ]
+    },
+    "creativeTab": {
+      "value": "COMBAT"
+    },
+    "harvestLevel": 1,
+    "efficiency": 4.0,
+    "attackSpeed": 1.0,
+    "enchantability": 2,
+    "damageVsEntity": 4.0,
+    "usageCount": 0,
+    "blocksAffected": [],
+    "glowCondition": {
+      "fixedValue": false
+    },
+    "repairItems": [],
+    "immuneToFire": true,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "onRightClickedInAir": {
+      "name": "RedemptionPriShchielchkiePKM2"
+    }
+  }
+}

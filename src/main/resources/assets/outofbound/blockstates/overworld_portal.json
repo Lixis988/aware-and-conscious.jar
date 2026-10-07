@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "outofbound:block/overworld_portal"
+    }
+  }
+}

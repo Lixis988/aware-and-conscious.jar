@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.lixis9.eventjar.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "eventjar.refmap.json",
+  "mixins": [],
+  "client": [
+    "TitleScreenMixin",
+    "TitleScreenAccessor",
+    "SplashRendererMixin",
+    "SplashRendererAccessor",
+    "MusicManagerMixin",
+    "LightTextureMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

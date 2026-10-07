@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "eventjar:item/e99e44589d46bd460523bfe7f68abe11-photoroom"
+  }
+}

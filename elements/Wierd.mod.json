@@ -1,0 +1,50 @@
+{
+  "_fv": 60,
+  "_type": "dimension",
+  "definition": {
+    "biomesInDimension": [
+      {
+        "value": "CUSTOM:Wierdness"
+      }
+    ],
+    "worldGenType": "Normal world gen",
+    "mainFillerBlock": {
+      "value": "CUSTOM:Godisloveyoublock"
+    },
+    "fluidBlock": {
+      "value": "CUSTOM:Tastyblock"
+    },
+    "canRespawnHere": false,
+    "hasFog": true,
+    "isDark": false,
+    "doesWaterVaporize": false,
+    "sleepResult": "ALLOW",
+    "hasSkyLight": false,
+    "imitateOverworldBehaviour": false,
+    "onPlayerEntersDimension": {
+      "name": "WierdKoghdaIghrokPieriekhoditVIzmierieniie"
+    },
+    "portalFrame": {
+      "value": "CUSTOM:Tastyblock"
+    },
+    "portalParticles": {
+      "value": "PORTAL"
+    },
+    "portalLuminance": 0,
+    "portalSound": {
+      "value": "block.portal.ambient"
+    },
+    "enableIgniter": true,
+    "igniterName": "Wierd Portal Igniter",
+    "igniterRarity": "COMMON",
+    "specialInformation": {
+      "fixedValue": []
+    },
+    "igniterTab": {
+      "value": "TOOLS"
+    },
+    "texture": "45cf117a935715d7528897330b5c7ff1",
+    "portalTexture": "7f2227a617ba53547a2bf987fba5e559",
+    "enablePortal": true
+  }
+}

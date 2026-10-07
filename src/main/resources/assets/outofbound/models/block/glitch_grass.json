@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/grass_block",
+  "textures": {
+    "particle": "outofbound:block/glitch_grass_side",
+    "top": "minecraft:block/grass_block_top",
+    "side": "outofbound:block/glitch_grass_side",
+    "overlay": "minecraft:block/grass_block_side_overlay"
+  }
+}

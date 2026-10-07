@@ -1,0 +1,10 @@
+[general]
+
+debug_mode = false
+
+patience_increase_rate = 1
+risperidone_decrease_amount = 1200
+overdose_threshold = 24000
+
+save_interval_ticks = 6000
+auto_save_enabled = true
