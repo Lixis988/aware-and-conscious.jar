@@ -1,15 +1,11 @@
 {
-  "_author": "Lixis9 (Lev Glebovich Belyakov)",
-  "_ownership": "Mod created by Lixis9 (Lev Glebovich Belyakov). If this mod is posted under a different name, it has been stolen.",
-  "_copyright": "Mod created by Lixis9 (Lev Glebovich Belyakov). If this mod is posted under a different name, it has been stolen.",
   "bs": {
     "sounds": [
       {
         "name": "eventjar:d47b6a43e277723",
         "stream": true
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "cavesound": {
     "sounds": [
@@ -17,8 +13,7 @@
         "name": "eventjar:cave2",
         "stream": false
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "cave3": {
     "sounds": [
@@ -26,8 +21,7 @@
         "name": "eventjar:cave3",
         "stream": false
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "cave4": {
     "sounds": [
@@ -35,8 +29,7 @@
         "name": "eventjar:cave4",
         "stream": false
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "cave5": {
     "sounds": [
@@ -44,8 +37,7 @@
         "name": "eventjar:cave5",
         "stream": false
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "cave6": {
     "sounds": [
@@ -53,8 +45,7 @@
         "name": "eventjar:cave6",
         "stream": false
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "cave9": {
     "sounds": [
@@ -62,8 +53,7 @@
         "name": "eventjar:cave9",
         "stream": false
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "cave12": {
     "sounds": [
@@ -71,8 +61,7 @@
         "name": "eventjar:cave12",
         "stream": false
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "cavejumpscare15": {
     "sounds": [
@@ -399,6 +388,14 @@
       {
         "name": "eventjar:scarysoundmimic",
         "stream": false
+      }
+    ]
+  },
+  "meachase": {
+    "sounds": [
+      {
+        "name": "eventjar:meachase",
+        "stream": true
       }
     ]
   }

@@ -2,7 +2,6 @@ package net.lixis.outofbound.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -47,8 +46,7 @@ public class AspectBillboardEntityRenderer<T extends Entity> extends EntityRende
 		float width = height * aspect;
 
 		poseStack.pushPose();
-		poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-		poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
+		BillboardFacing.yawOnly(poseStack, this.entityRenderDispatcher);
 
 		PoseStack.Pose pose = poseStack.last();
 		Matrix4f matrix = pose.pose();

@@ -20,10 +20,11 @@ public class WorldProgressSyncPacket {
 	private final boolean undefiendMaze;
 	private final long boundedcowCollisionTick;
 	private final long boundedcowCollisionDayTime;
+	private final boolean meatGameMode;
 
 	public WorldProgressSyncPacket(boolean boundedcowCollision, WorldGameStage gameStage, long sinkUntilTick,
 			long worldGameTime, long worldDayTime, long mazeIndex, boolean undefiendMaze,
-			long boundedcowCollisionTick, long boundedcowCollisionDayTime) {
+			long boundedcowCollisionTick, long boundedcowCollisionDayTime, boolean meatGameMode) {
 		this.boundedcowCollision = boundedcowCollision;
 		this.gameStage = gameStage.id();
 		this.sinkUntilTick = sinkUntilTick;
@@ -33,6 +34,7 @@ public class WorldProgressSyncPacket {
 		this.undefiendMaze = undefiendMaze;
 		this.boundedcowCollisionTick = boundedcowCollisionTick;
 		this.boundedcowCollisionDayTime = boundedcowCollisionDayTime;
+		this.meatGameMode = meatGameMode;
 	}
 
 	public static void encode(WorldProgressSyncPacket packet, FriendlyByteBuf buffer) {
@@ -45,6 +47,7 @@ public class WorldProgressSyncPacket {
 		buffer.writeBoolean(packet.undefiendMaze);
 		buffer.writeLong(packet.boundedcowCollisionTick);
 		buffer.writeLong(packet.boundedcowCollisionDayTime);
+		buffer.writeBoolean(packet.meatGameMode);
 	}
 
 	public static WorldProgressSyncPacket decode(FriendlyByteBuf buffer) {
@@ -57,7 +60,8 @@ public class WorldProgressSyncPacket {
 				buffer.readLong(),
 				buffer.readBoolean(),
 				buffer.readLong(),
-				buffer.readLong());
+				buffer.readLong(),
+				buffer.readBoolean());
 	}
 
 	public static void handle(WorldProgressSyncPacket packet, Supplier<NetworkEvent.Context> contextSupplier) {
@@ -71,7 +75,8 @@ public class WorldProgressSyncPacket {
 				packet.mazeIndex,
 				packet.undefiendMaze,
 				packet.boundedcowCollisionTick,
-				packet.boundedcowCollisionDayTime)));
+				packet.boundedcowCollisionDayTime,
+				packet.meatGameMode)));
 		context.setPacketHandled(true);
 	}
 }

@@ -32,6 +32,7 @@ public final class MazeTeleportUtil {
 		}
 
 		WorldInternalConfig.markTeleportedToMaze(server, index);
+		WorldInternalConfig.incrementNaturalMazeEntries(server);
 		MazePortalPlacer.ensurePortal(maze);
 		MazeSafeSpawn.teleportPlayerToMaze(player, maze);
 		player.getPersistentData().putLong("outofbound_maze_index", index);

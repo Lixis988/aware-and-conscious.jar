@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
+import net.lixis.outofbound.client.renderer.BillboardFacing;
 import net.lixis9.eventjar.entity.FaultEntity;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
@@ -37,9 +37,7 @@ public class FaultRenderer extends EntityRenderer<FaultEntity> {
         float shakeZ = (random.nextFloat() - 0.5f) * SHAKE_INTENSITY;
         poseStack.translate(shakeX, shakeY, shakeZ);
 
-        poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-
-        poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
+        BillboardFacing.yawOnly(poseStack, this.entityRenderDispatcher);
 
         poseStack.scale(SCALE_FACTOR, SCALE_FACTOR, SCALE_FACTOR);
 
@@ -60,13 +58,13 @@ public class FaultRenderer extends EntityRenderer<FaultEntity> {
         float vHead = v0 + (v1 - v0) * 0.3f;
         float vBody = v0 + (v1 - v0) * 0.7f;
 
-        addVertex(vertexBuilder, pose, normal, -halfWidth, -halfHeight, 0, u0, v0, packedLight);
+        addVertex(vertexBuilder, pose, normal, -halfWidth, -halfHeight, 0, u0, v1, packedLight);
 
-        addVertex(vertexBuilder, pose, normal, halfWidth, -halfHeight, 0, u1, v0, packedLight);
+        addVertex(vertexBuilder, pose, normal, halfWidth, -halfHeight, 0, u1, v1, packedLight);
 
-        addVertex(vertexBuilder, pose, normal, halfWidth, halfHeight, 0, u1, v1, packedLight);
+        addVertex(vertexBuilder, pose, normal, halfWidth, halfHeight, 0, u1, v0, packedLight);
 
-        addVertex(vertexBuilder, pose, normal, -halfWidth, halfHeight, 0, u0, v1, packedLight);
+        addVertex(vertexBuilder, pose, normal, -halfWidth, halfHeight, 0, u0, v0, packedLight);
 
         poseStack.popPose();
     }

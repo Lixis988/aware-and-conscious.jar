@@ -25,6 +25,7 @@ public final class BlackSquareTeleportHandler {
 		}
 
 		WorldInternalConfig.markTeleportedToMaze(server, newIndex);
+		WorldInternalConfig.incrementNaturalMazeEntries(server);
 		MazePortalPlacer.ensurePortal(maze);
 
 		for (ServerPlayer player : server.getPlayerList().getPlayers()) {

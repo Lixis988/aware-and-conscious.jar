@@ -1,6 +1,5 @@
 package net.lixis9.eventjar.mixin;
 
-import net.lixis.outofbound.NoiseMusicHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.sounds.MusicManager;
@@ -15,13 +14,9 @@ public class MusicManagerMixin {
 
 	@Inject(method = "tick", at = @At("HEAD"), cancellable = true)
 	private void eventjar$musicTick(CallbackInfo ci) {
-		Minecraft minecraft = Minecraft.getInstance();
-		if (minecraft.screen instanceof TitleScreen) {
+		if (Minecraft.getInstance().screen instanceof TitleScreen) {
 			ci.cancel();
-			return;
 		}
-		ci.cancel();
-		NoiseMusicHandler.ensurePlaying(minecraft);
 	}
 
 	@Inject(method = "startPlaying", at = @At("HEAD"), cancellable = true)

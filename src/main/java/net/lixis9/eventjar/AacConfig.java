@@ -15,7 +15,8 @@ public final class AacConfig {
 	private static final ForgeConfigSpec.DoubleValue STRUCTURE_SPAWN_MULT_VALUE;
 	private static final ForgeConfigSpec.BooleanValue ENABLE_SIGNS_VALUE;
 	private static final ForgeConfigSpec.BooleanValue ENABLE_STRUCTURES_VALUE;
-	private static final ForgeConfigSpec.BooleanValue ENABLE_BLOOD_RAIN_VALUE;
+	private static final ForgeConfigSpec.BooleanValue ENABLE_MEAT_SWAP_VALUE;
+	private static final ForgeConfigSpec.DoubleValue MEAT_SWAP_STRENGTH_VALUE;
 
 	public static volatile boolean SAFE_MODE = false;
 	public static volatile boolean SAFE_MODE_CHOSEN = false;
@@ -26,7 +27,8 @@ public final class AacConfig {
 	public static volatile double STRUCTURE_SPAWN_MULTIPLIER = 1.0D;
 	public static volatile boolean ENABLE_SIGNS = true;
 	public static volatile boolean ENABLE_STRUCTURES = true;
-	public static volatile boolean ENABLE_BLOOD_RAIN = true;
+	public static volatile boolean ENABLE_MEAT_SWAP = true;
+	public static volatile double MEAT_SWAP_STRENGTH = 1.0D;
 
 	static {
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -56,8 +58,11 @@ public final class AacConfig {
 		ENABLE_STRUCTURES_VALUE = builder.comment("Allow structure placers (e.g. christ).").define("enableStructures", true);
 		builder.pop();
 
-		builder.comment("Ambient horror events.").push("events");
-		ENABLE_BLOOD_RAIN_VALUE = builder.comment("Allow the blood rain ambient event.").define("enableBloodRain", true);
+		builder.comment("World/GUI meat texture replacement.").push("meat");
+		ENABLE_MEAT_SWAP_VALUE = builder.comment("Replace blocks, items, and menus with meat textures over time.")
+				.define("enableMeatSwap", true);
+		MEAT_SWAP_STRENGTH_VALUE = builder.comment("Coverage multiplier. 0 = none, 1 = default ramp.")
+				.defineInRange("meatSwapStrength", 1.0D, 0.0D, 1.0D);
 		builder.pop();
 
 		SPEC = builder.build();
@@ -76,7 +81,8 @@ public final class AacConfig {
 		STRUCTURE_SPAWN_MULTIPLIER = STRUCTURE_SPAWN_MULT_VALUE.get();
 		ENABLE_SIGNS = ENABLE_SIGNS_VALUE.get();
 		ENABLE_STRUCTURES = ENABLE_STRUCTURES_VALUE.get();
-		ENABLE_BLOOD_RAIN = ENABLE_BLOOD_RAIN_VALUE.get();
+		ENABLE_MEAT_SWAP = ENABLE_MEAT_SWAP_VALUE.get();
+		MEAT_SWAP_STRENGTH = MEAT_SWAP_STRENGTH_VALUE.get();
 	}
 
 	public static void setSafeMode(boolean enabled) {
@@ -135,10 +141,27 @@ public final class AacConfig {
 		SPEC.save();
 	}
 
-	public static void setEnableBloodRain(boolean enabled) {
-		ENABLE_BLOOD_RAIN_VALUE.set(enabled);
-		ENABLE_BLOOD_RAIN = enabled;
+	public static void setEnableMeatSwap(boolean enabled) {
+		ENABLE_MEAT_SWAP_VALUE.set(enabled);
+		ENABLE_MEAT_SWAP = enabled;
 		SPEC.save();
+	}
+
+	public static void setMeatSwapStrength(double value) {
+		MEAT_SWAP_STRENGTH_VALUE.set(Math.max(0.0D, Math.min(1.0D, value)));
+		MEAT_SWAP_STRENGTH = MEAT_SWAP_STRENGTH_VALUE.get();
+		SPEC.save();
+	}
+
+	public static boolean meatSwapEnabled() {
+		return ENABLE_MEAT_SWAP && MEAT_SWAP_STRENGTH > 0.0D;
+	}
+
+	public static float meatSwapStrength() {
+		if (!ENABLE_MEAT_SWAP) {
+			return 0.0F;
+		}
+		return (float) MEAT_SWAP_STRENGTH;
 	}
 
 	public static boolean allowEntitySpawnRoll() {

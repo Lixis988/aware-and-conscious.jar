@@ -1,15 +1,11 @@
 {
-  "_author": "Lixis9 (Lev Glebovich Belyakov)",
-  "_ownership": "Mod created by Lixis9 (Lev Glebovich Belyakov). If this mod is posted under a different name, it has been stolen.",
-  "_copyright": "Mod created by Lixis9 (Lev Glebovich Belyakov). If this mod is posted under a different name, it has been stolen.",
   "noise": {
     "sounds": [
       {
         "name": "outofbound:noise",
         "stream": true
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "noises": {
     "sounds": [
@@ -17,8 +13,7 @@
         "name": "outofbound:noises",
         "stream": true
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "noise2": {
     "sounds": [
@@ -26,8 +21,7 @@
         "name": "outofbound:noise2",
         "stream": true
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "noise3": {
     "sounds": [
@@ -35,8 +29,7 @@
         "name": "outofbound:noise3",
         "stream": true
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "noise4": {
     "sounds": [
@@ -44,8 +37,7 @@
         "name": "outofbound:noise4",
         "stream": true
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "noise5": {
     "sounds": [
@@ -53,8 +45,7 @@
         "name": "outofbound:noise5",
         "stream": true
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "noise6": {
     "sounds": [
@@ -62,8 +53,7 @@
         "name": "outofbound:noise6",
         "stream": true
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "noise7": {
     "sounds": [
@@ -71,8 +61,7 @@
         "name": "outofbound:noise7",
         "stream": true
       }
-    ],
-    "_author": "Lixis9 (Lev Glebovich Belyakov)"
+    ]
   },
   "noise8": {
     "sounds": [

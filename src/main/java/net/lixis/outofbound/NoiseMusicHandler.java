@@ -3,13 +3,12 @@ package net.lixis.outofbound;
 import net.lixis.outofbound.dimension.MazeDimensionNoise;
 import net.lixis.outofbound.dimension.MazeDimensions;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -21,9 +20,12 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = net.lixis9.eventjar.EventjarMod.MODID, value = Dist.CLIENT)
 public final class NoiseMusicHandler {
 
-	private static LoopingNoiseInstance loopInstance;
+	private static final int STREAM_GRACE_TICKS = 40;
+
+	private static SoundInstance loopInstance;
 	private static ResourceKey<Level> activeDimension;
 	private static SoundEvent activeSound;
+	private static int startGrace;
 
 	private NoiseMusicHandler() {
 	}
@@ -46,26 +48,30 @@ public final class NoiseMusicHandler {
 			return;
 		}
 
+		SoundManager soundManager = minecraft.getSoundManager();
 		ResourceKey<Level> dimension = minecraft.level.dimension();
 		SoundEvent sound = soundForLevel(minecraft);
-		SoundManager soundManager = minecraft.getSoundManager();
+		boolean sameTrack = loopInstance != null && dimension.equals(activeDimension) && sound == activeSound;
 
-		if (loopInstance != null
-				&& !loopInstance.isStopped()
-				&& soundManager.isActive(loopInstance)
-				&& dimension.equals(activeDimension)
-				&& sound == activeSound) {
-			loopInstance.setVolume(musicVolume);
+		if (sameTrack && soundManager.isActive(loopInstance)) {
+			startGrace = 0;
+			return;
+		}
+		if (sameTrack && startGrace > 0) {
+			startGrace--;
 			return;
 		}
 
-		stop(minecraft);
-		minecraft.getMusicManager().stopPlaying();
+		if (loopInstance != null) {
+			soundManager.stop(loopInstance);
+			loopInstance = null;
+		}
 
 		activeDimension = dimension;
 		activeSound = sound;
-		loopInstance = new LoopingNoiseInstance(sound, musicVolume);
+		loopInstance = SimpleSoundInstance.forMusic(sound);
 		soundManager.play(loopInstance);
+		startGrace = STREAM_GRACE_TICKS;
 	}
 
 	private static SoundEvent soundForLevel(Minecraft minecraft) {
@@ -80,39 +86,16 @@ public final class NoiseMusicHandler {
 		if (minecraft == null) {
 			return;
 		}
+		SoundManager soundManager = minecraft.getSoundManager();
 		if (loopInstance != null) {
-			minecraft.getSoundManager().stop(loopInstance);
+			soundManager.stop(loopInstance);
 			loopInstance = null;
+		}
+		if (activeSound != null) {
+			soundManager.stop(activeSound.getLocation(), SoundSource.MUSIC);
 		}
 		activeDimension = null;
 		activeSound = null;
-		minecraft.getMusicManager().stopPlaying();
-	}
-
-	private static final class LoopingNoiseInstance extends AbstractTickableSoundInstance {
-
-		private LoopingNoiseInstance(SoundEvent sound, float volume) {
-			super(sound, SoundSource.MUSIC, SoundInstance.createUnseededRandom());
-			this.volume = volume;
-			this.pitch = 1.0F;
-			this.looping = true;
-			this.relative = true;
-			this.attenuation = SoundInstance.Attenuation.NONE;
-			this.x = 0.0D;
-			this.y = 0.0D;
-			this.z = 0.0D;
-		}
-
-		void setVolume(float volume) {
-			this.volume = volume;
-		}
-
-		@Override
-		public void tick() {
-
-			if (!Minecraft.getInstance().getSoundManager().isActive(this)) {
-				this.stop();
-			}
-		}
+		startGrace = 0;
 	}
 }

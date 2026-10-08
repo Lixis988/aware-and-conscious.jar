@@ -1,10 +1,12 @@
 package net.lixis.outofbound;
 
 import net.lixis.outofbound.dimension.MazeDimensions;
+import net.lixis.outofbound.world.MeatGameMode;
 import net.lixis.outofbound.world.WorldInternalConfig;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
@@ -13,6 +15,13 @@ import net.minecraftforge.network.PacketDistributor;
 public final class WorldProgressServerHandler {
 
 	private WorldProgressServerHandler() {
+	}
+
+	@SubscribeEvent
+	public static void onServerStarted(ServerStartedEvent event) {
+		if (MeatGameMode.consumePendingCreate()) {
+			WorldInternalConfig.setMeatGameMode(event.getServer(), true);
+		}
 	}
 
 	@SubscribeEvent
@@ -73,6 +82,7 @@ public final class WorldProgressServerHandler {
 				WorldInternalConfig.getMazeIndex(server),
 				WorldInternalConfig.isUndefiendMaze(server),
 				WorldInternalConfig.getBoundedcowCollisionTick(server),
-				WorldInternalConfig.getBoundedcowCollisionDayTime(server));
+				WorldInternalConfig.getBoundedcowCollisionDayTime(server),
+				WorldInternalConfig.isMeatGameMode(server));
 	}
 }

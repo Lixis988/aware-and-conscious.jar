@@ -21,12 +21,13 @@ public final class WorldProgressClientState {
 	private static long boundedcowCollisionDayTime;
 	private static long worldGameTime;
 	private static long worldDayTime;
+	private static boolean meatGameMode;
 
 	private WorldProgressClientState() {
 	}
 
 	public static void apply(boolean collision, WorldGameStage stage, long sinkUntil, long gameTime, long dayTime,
-			long maze, boolean undefiend, long collisionTick, long collisionDayTime) {
+			long maze, boolean undefiend, long collisionTick, long collisionDayTime, boolean meatMode) {
 		boundedcowCollision = collision;
 		gameStage = stage;
 		sinkUntilTick = sinkUntil;
@@ -36,6 +37,7 @@ public final class WorldProgressClientState {
 		boundedcowCollisionDayTime = collisionDayTime;
 		worldGameTime = gameTime;
 		worldDayTime = dayTime;
+		meatGameMode = meatMode;
 
 		MemoryCorruptionGate.clearManualOverride();
 		BoundedcowWindowShaker.reset();
@@ -45,6 +47,11 @@ public final class WorldProgressClientState {
 		} else {
 			GlobalWorldGlitchScheduler.reset();
 		}
+
+	}
+
+	public static void markMeatGameModeLocal() {
+		meatGameMode = true;
 	}
 
 	public static boolean hasBoundedcowCollision() {
@@ -124,6 +131,10 @@ public final class WorldProgressClientState {
 		return worldGameTime;
 	}
 
+	public static boolean isMeatGameMode() {
+		return meatGameMode;
+	}
+
 	public static long getOverworldDayTime(Minecraft minecraft) {
 		if (minecraft == null) {
 			return worldDayTime;
@@ -160,6 +171,7 @@ public final class WorldProgressClientState {
 		boundedcowCollisionDayTime = 0L;
 		worldGameTime = 0L;
 		worldDayTime = 0L;
+		meatGameMode = false;
 		MemoryCorruptionGate.clearManualOverride();
 		BoundedcowWindowShaker.reset();
 		GlobalWorldGlitchScheduler.reset();

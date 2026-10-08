@@ -6,8 +6,6 @@ import net.lixis9.eventjar.EventjarMod;
 import net.lixis9.eventjar.init.EventjarModEntities;
 import net.lixis9.eventjar.network.ClientOsEffectPacket;
 
-import net.minecraftforge.server.ServerLifecycleHooks;
-
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -33,19 +31,11 @@ public class GodPriStolknovieniiIghrokaSSushchnostiuProcedure {
 
 		final ServerPlayer target = player instanceof ServerPlayer sp ? sp : null;
 		final LevelAccessor levelRef = world;
+		if (target != null && target.connection != null) {
+			ClientOsEffectPacket.send(target, ClientOsEffectPacket.Effect.MEETCRAFT);
+		}
 
-		EventjarMod.queueServerWork(5, () -> {
-			removeAllWrathGods(levelRef);
-			if (target != null && target.connection != null) {
-				ClientOsEffectPacket.send(target, ClientOsEffectPacket.Effect.MEETCRAFT);
-			}
-			EventjarMod.queueServerWork(20, () -> {
-				removeAllWrathGods(levelRef);
-				if (!levelRef.isClientSide() && levelRef.getServer() != null) {
-					ServerLifecycleHooks.getCurrentServer().stopServer();
-				}
-			});
-		});
+		EventjarMod.queueServerWork(5, () -> removeAllWrathGods(levelRef));
 	}
 
 	public static void removeAllWrathGods(LevelAccessor world) {

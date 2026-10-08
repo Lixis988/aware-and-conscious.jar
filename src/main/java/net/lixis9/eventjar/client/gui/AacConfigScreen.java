@@ -67,9 +67,15 @@ public class AacConfigScreen extends Screen {
 		});
 		y += BUTTON_SPACING;
 
-		addToggle(left, y, bloodRainText(), b -> {
-			AacConfig.setEnableBloodRain(!AacConfig.ENABLE_BLOOD_RAIN);
-			b.setMessage(Component.literal(bloodRainText()));
+		addToggle(left, y, meatSwapText(), b -> {
+			AacConfig.setEnableMeatSwap(!AacConfig.ENABLE_MEAT_SWAP);
+			b.setMessage(Component.literal(meatSwapText()));
+		});
+		y += BUTTON_SPACING;
+
+		addToggle(left, y, meatStrengthText(), b -> {
+			AacConfig.setMeatSwapStrength(cycleMeatStrength(AacConfig.MEAT_SWAP_STRENGTH));
+			b.setMessage(Component.literal(meatStrengthText()));
 		});
 		y += BUTTON_SPACING;
 
@@ -169,8 +175,25 @@ public class AacConfigScreen extends Screen {
 		return "Horror structures: " + onOff(AacConfig.ENABLE_STRUCTURES);
 	}
 
-	private static String bloodRainText() {
-		return "Blood rain event: " + onOff(AacConfig.ENABLE_BLOOD_RAIN);
+	private static String meatSwapText() {
+		return "Meat replacement: " + onOff(AacConfig.ENABLE_MEAT_SWAP);
+	}
+
+	private static String meatStrengthText() {
+		return "Meat coverage: " + fmt(AacConfig.MEAT_SWAP_STRENGTH);
+	}
+
+	private static double cycleMeatStrength(double current) {
+		if (current <= 0.01D) {
+			return 0.25D;
+		}
+		if (current < 0.4D) {
+			return 0.5D;
+		}
+		if (current < 0.75D) {
+			return 1.0D;
+		}
+		return 0.0D;
 	}
 
 	private static String spawnEntityText() {

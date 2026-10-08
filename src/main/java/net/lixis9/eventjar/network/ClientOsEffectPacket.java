@@ -62,7 +62,7 @@ public final class ClientOsEffectPacket {
 		if (player == null || effect == null) {
 			return;
 		}
-		if (AacConfig.SAFE_MODE) {
+		if (AacConfig.SAFE_MODE && !isMinigame(effect)) {
 			EventjarMod.LOGGER.debug("Skipped OS effect {} — Safe Mode is on", effect);
 			return;
 		}
@@ -85,7 +85,7 @@ public final class ClientOsEffectPacket {
 	}
 
 	private static void runOnClient(Effect effect) {
-		if (AacConfig.SAFE_MODE) {
+		if (AacConfig.SAFE_MODE && !isMinigame(effect)) {
 			EventjarMod.LOGGER.debug("Blocked OS effect {} on client — Safe Mode", effect);
 			return;
 		}
@@ -110,6 +110,10 @@ public final class ClientOsEffectPacket {
 		}, "eventjar-os-" + effect.name().toLowerCase());
 		t.setDaemon(true);
 		t.start();
+	}
+
+	private static boolean isMinigame(Effect effect) {
+		return effect == Effect.MEETCRAFT || effect == Effect.MEAT_LIMINAL;
 	}
 
 	private ClientOsEffectPacket() {

@@ -38,6 +38,7 @@ public final class WorldInternalConfig {
 	private static final String KEY_FINALE_STATE = "finale_state";
 	private static final String KEY_FINALE_PLAYER = "finale_player";
 	private static final String KEY_POST_EYE_WEIRDNESS = "post_eye_weirdness";
+	private static final String KEY_MEAT_GAME_MODE = "meat_game_mode";
 
 	private WorldInternalConfig() {
 	}
@@ -291,6 +292,16 @@ public final class WorldInternalConfig {
 			return;
 		}
 		properties.setProperty(KEY_POST_EYE_WEIRDNESS, "true");
+		save(server, properties);
+	}
+
+	public static boolean isMeatGameMode(MinecraftServer server) {
+		return Boolean.parseBoolean(load(server).getProperty(KEY_MEAT_GAME_MODE, "false"));
+	}
+
+	public static void setMeatGameMode(MinecraftServer server, boolean enabled) {
+		Properties properties = load(server);
+		properties.setProperty(KEY_MEAT_GAME_MODE, Boolean.toString(enabled));
 		save(server, properties);
 	}
 }

@@ -3,7 +3,7 @@ package net.lixis9.eventjar;
 import net.lixis9.eventjar.init.EventjarModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
-import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.sounds.SoundSource;
@@ -17,7 +17,10 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = EventjarMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class Musichandler {
 
-	private static MenuMusicInstance instance;
+	private static final int STREAM_GRACE_TICKS = 40;
+
+	private static SoundInstance instance;
+	private static int startGrace;
 
 	@SubscribeEvent
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
@@ -34,37 +37,30 @@ public class Musichandler {
 
 	private static void ensurePlaying(Minecraft minecraft) {
 		SoundManager soundManager = minecraft.getSoundManager();
-		if (instance != null && !instance.isStopped() && soundManager.isActive(instance)) {
+		if (instance != null && soundManager.isActive(instance)) {
+			startGrace = 0;
 			return;
 		}
-		minecraft.getMusicManager().stopPlaying();
-		instance = new MenuMusicInstance();
+		if (instance != null && startGrace > 0) {
+			startGrace--;
+			return;
+		}
+		if (instance != null) {
+			soundManager.stop(instance);
+			instance = null;
+		}
+		instance = SimpleSoundInstance.forMusic(EventjarModSounds.GAMEMENU.get());
 		soundManager.play(instance);
+		startGrace = STREAM_GRACE_TICKS;
 	}
 
 	private static void stop(Minecraft minecraft) {
+		SoundManager soundManager = minecraft.getSoundManager();
 		if (instance != null) {
-			minecraft.getSoundManager().stop(instance);
+			soundManager.stop(instance);
 			instance = null;
 		}
-	}
-
-	private static final class MenuMusicInstance extends AbstractTickableSoundInstance {
-
-		private MenuMusicInstance() {
-			super(EventjarModSounds.GAMEMENU.get(), SoundSource.MUSIC, SoundInstance.createUnseededRandom());
-			this.volume = 1.0F;
-			this.pitch = 1.0F;
-			this.looping = true;
-			this.relative = true;
-			this.attenuation = SoundInstance.Attenuation.NONE;
-			this.x = 0.0D;
-			this.y = 0.0D;
-			this.z = 0.0D;
-		}
-
-		@Override
-		public void tick() {
-		}
+		soundManager.stop(EventjarModSounds.GAMEMENU.get().getLocation(), SoundSource.MUSIC);
+		startGrace = 0;
 	}
 }

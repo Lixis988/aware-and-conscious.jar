@@ -11,7 +11,10 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.event.TickEvent;
@@ -108,16 +111,22 @@ public class EventjarMod {
 		if (action == null) {
 			return;
 		}
-
-		int delay = Math.max(tick, 1);
-		Runnable enqueue = () -> workQueue.add(new AbstractMap.SimpleEntry<>(action, delay));
+		AbstractMap.SimpleEntry<Runnable, Integer> entry =
+				new AbstractMap.SimpleEntry<>(action, Math.max(tick, 1));
 		if (Thread.currentThread().getThreadGroup() == SidedThreadGroups.SERVER) {
-			enqueue.run();
+			workQueue.add(entry);
 			return;
 		}
 		MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
 		if (server != null) {
-			server.execute(enqueue);
+			server.execute(() -> workQueue.add(entry));
+			return;
+		}
+		if (FMLEnvironment.dist == Dist.CLIENT) {
+			DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+					() -> () -> net.lixis9.eventjar.client.IntegratedWorkEnqueue.addIfSingleplayer(workQueue, entry));
+		} else {
+			workQueue.add(entry);
 		}
 	}
 

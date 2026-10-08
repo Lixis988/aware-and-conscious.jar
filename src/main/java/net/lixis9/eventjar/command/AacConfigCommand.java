@@ -12,11 +12,9 @@ import net.lixis.outofbound.feature.corruption.ChunkNumberCommand;
 import net.lixis.outofbound.feature.corruption.CorruptionCommand;
 import net.lixis9.eventjar.AacConfig;
 import net.lixis9.eventjar.EventjarMod;
-import net.lixis9.eventjar.procedures.BloodRainProcedure;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -49,7 +47,7 @@ public final class AacConfigCommand {
 	private static LiteralArgumentBuilder<CommandSourceStack> buildRoot(String name) {
 		return Commands.literal(name)
 				.requires(source -> source.hasPermission(0))
-				.executes(AacConfigCommand::statusAndGui)
+				.executes(AacConfigCommand::openGui)
 				.then(Commands.literal("gui")
 						.requires(source -> source.hasPermission(0))
 						.executes(AacConfigCommand::openGui))
@@ -92,22 +90,18 @@ public final class AacConfigCommand {
 						.then(Commands.literal("off").executes(ctx -> setStructures(ctx, false)))
 						.then(Commands.argument("enabled", BoolArgumentType.bool())
 								.executes(ctx -> setStructures(ctx, BoolArgumentType.getBool(ctx, "enabled")))))
-				.then(Commands.literal("bloodrain")
+				.then(Commands.literal("meat")
 						.requires(source -> source.hasPermission(0))
-						.executes(ctx -> boolStatus(ctx, "enableBloodRain", AacConfig.ENABLE_BLOOD_RAIN))
-						.then(Commands.literal("on").executes(ctx -> setBloodRain(ctx, true)))
-						.then(Commands.literal("off").executes(ctx -> setBloodRain(ctx, false)))
-						.then(Commands.literal("now").requires(source -> source.hasPermission(2))
-								.executes(AacConfigCommand::triggerBloodRain)))
+						.executes(ctx -> boolStatus(ctx, "enableMeatSwap", AacConfig.ENABLE_MEAT_SWAP))
+						.then(Commands.literal("on").executes(ctx -> setMeatSwap(ctx, true)))
+						.then(Commands.literal("off").executes(ctx -> setMeatSwap(ctx, false)))
+						.then(Commands.literal("strength")
+								.then(Commands.argument("value", DoubleArgumentType.doubleArg(0.0D, 1.0D))
+										.executes(AacConfigCommand::setMeatStrength))))
 				.then(BoundedOneAiConfigCommand.build())
 				.then(CorruptionCommand.build("corruption"))
 				.then(CorruptionCommand.build())
 				.then(ChunkNumberCommand.build());
-	}
-
-	private static int statusAndGui(CommandContext<CommandSourceStack> ctx) {
-		dumpStatus(ctx.getSource());
-		return openGui(ctx);
 	}
 
 	private static int openGui(CommandContext<CommandSourceStack> ctx) {
@@ -121,27 +115,6 @@ public final class AacConfigCommand {
 			return 0;
 		}
 		return Command.SINGLE_SUCCESS;
-	}
-
-	private static void dumpStatus(CommandSourceStack source) {
-		source.sendSuccess(() -> Component.literal("--- AAC config ---"), false);
-		source.sendSuccess(() -> Component.literal(
-				"safeMode: " + onOff(AacConfig.SAFE_MODE)
-						+ " (chosen: " + AacConfig.SAFE_MODE_CHOSEN + ")"), false);
-		source.sendSuccess(() -> Component.literal(
-				"textDistortion: " + onOff(AacConfig.TEXT_DISTORTION)
-						+ " | itemRenamer: " + onOff(AacConfig.ITEM_RENAMER)), false);
-		source.sendSuccess(() -> Component.literal(
-				"spawn entity/event/structure: "
-						+ fmt(AacConfig.ENTITY_SPAWN_MULTIPLIER) + " / "
-						+ fmt(AacConfig.EVENT_SPAWN_MULTIPLIER) + " / "
-						+ fmt(AacConfig.STRUCTURE_SPAWN_MULTIPLIER)), false);
-		source.sendSuccess(() -> Component.literal(
-				"signs: " + onOff(AacConfig.ENABLE_SIGNS)
-						+ " | structures: " + onOff(AacConfig.ENABLE_STRUCTURES)
-						+ " | bloodRain: " + onOff(AacConfig.ENABLE_BLOOD_RAIN)), false);
-		source.sendSuccess(() -> Component.literal(
-				"Use /aac_config gui | safemode | text/jumbled | items/unstackable | spawn | signs | structures | bloodrain | ai | corruption"), false);
 	}
 
 	private static LiteralArgumentBuilder<CommandSourceStack> buildBoolToggle(
@@ -216,19 +189,16 @@ public final class AacConfigCommand {
 		return Command.SINGLE_SUCCESS;
 	}
 
-	private static int setBloodRain(CommandContext<CommandSourceStack> ctx, boolean enabled) {
-		AacConfig.setEnableBloodRain(enabled);
-		ctx.getSource().sendSuccess(() -> Component.literal("enableBloodRain: " + onOff(enabled)), true);
+	private static int setMeatSwap(CommandContext<CommandSourceStack> ctx, boolean enabled) {
+		AacConfig.setEnableMeatSwap(enabled);
+		ctx.getSource().sendSuccess(() -> Component.literal("enableMeatSwap: " + onOff(enabled)), true);
 		return Command.SINGLE_SUCCESS;
 	}
 
-	private static int triggerBloodRain(CommandContext<CommandSourceStack> ctx) {
-		ServerLevel level = ctx.getSource().getLevel();
-		if (!BloodRainProcedure.start(level, 20 * 90)) {
-			ctx.getSource().sendFailure(Component.literal("Blood rain is disabled in config."));
-			return 0;
-		}
-		ctx.getSource().sendSuccess(() -> Component.literal("Blood rain started (90s)."), true);
+	private static int setMeatStrength(CommandContext<CommandSourceStack> ctx) {
+		double value = DoubleArgumentType.getDouble(ctx, "value");
+		AacConfig.setMeatSwapStrength(value);
+		ctx.getSource().sendSuccess(() -> Component.literal("meatSwapStrength: " + fmt(value)), true);
 		return Command.SINGLE_SUCCESS;
 	}
 

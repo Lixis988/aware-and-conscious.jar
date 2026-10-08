@@ -1,27 +1,25 @@
 package net.lixis.outofbound.client;
 
+import net.lixis.outofbound.world.MeatGameMode;
+import net.lixis.outofbound.world.WorldInternalConfig;
+import net.lixis9.eventjar.AacConfig;
 import net.lixis9.eventjar.EventjarMod;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.AbstractTexture;
-import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
+import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = EventjarMod.MODID, value = Dist.CLIENT)
 public final class MeatTextureSwap {
-
-	private static final float MAX_COVERAGE = 0.60F;
-	private static final float WORLD_FULL_DAYS = 18.0F;
-	private static final float WORLD_EASE = 1.6F;
-	private static final float ITEM_START_DAY = 10.0F;
-	private static final float ITEM_RAMP_DAYS = 8.0F;
 
 	public static final ResourceLocation[] MEAT_TEXTURES = {
 			new ResourceLocation(EventjarMod.MODID, "textures/block/meat.png"),
@@ -32,32 +30,22 @@ public final class MeatTextureSwap {
 			new ResourceLocation(EventjarMod.MODID, "textures/block/meat7.png")
 	};
 
-	private static final ResourceLocation[] MEAT_SPRITES = {
-			new ResourceLocation(EventjarMod.MODID, "block/meat"),
-			new ResourceLocation(EventjarMod.MODID, "block/meat2"),
-			new ResourceLocation(EventjarMod.MODID, "block/meat3"),
-			new ResourceLocation(EventjarMod.MODID, "block/meat4"),
-			new ResourceLocation(EventjarMod.MODID, "block/meat6"),
-			new ResourceLocation(EventjarMod.MODID, "block/meat7")
-	};
-
-	private static final List<TextureAtlasSprite> CACHED_BLOCK_MEAT = new ArrayList<>();
-	private static final List<TextureAtlasSprite> CACHED_ITEM_MEAT = new ArrayList<>();
+	private static final long SWAP_START_DAY = 10L;
 	private static final ThreadLocal<Boolean> REENTRY = ThreadLocal.withInitial(() -> Boolean.FALSE);
 
-	private static float cachedWorldCoverage;
-	private static float cachedItemCoverage;
 	private static long cachedDays;
 	private static int cachedTick = Integer.MIN_VALUE;
+	private static volatile boolean packActive;
+	private static volatile boolean reloadQueued;
+	private static volatile boolean packFailed;
+	private static String resolvedPackId = MeatFilePack.PACK_ID;
 
 	private MeatTextureSwap() {
 	}
 
-	private static void refreshCache() {
+	private static void refreshDays() {
 		Minecraft mc = Minecraft.getInstance();
 		if (mc.level == null) {
-			cachedWorldCoverage = 0.0F;
-			cachedItemCoverage = 0.0F;
 			cachedDays = 0L;
 			cachedTick = Integer.MIN_VALUE;
 			return;
@@ -67,34 +55,98 @@ public final class MeatTextureSwap {
 			return;
 		}
 		cachedTick = tick;
-		long days = WorldProgressClientState.getDaysSinceBoundedcowCollision(mc);
-		cachedDays = days;
-
-		float worldP = (float) Math.pow(Mth.clamp(days / WORLD_FULL_DAYS, 0.0F, 1.0F), WORLD_EASE);
-		if (WorldProgressClientState.isSinking()) {
-			worldP += 0.08F;
-		}
-		if (WorldProgressClientState.isInMaze()) {
-			worldP += 0.12F;
-		}
-		cachedWorldCoverage = Mth.clamp(worldP, 0.0F, 1.0F) * MAX_COVERAGE;
-
-		if (days < ITEM_START_DAY) {
-			cachedItemCoverage = 0.0F;
-		} else {
-			float itemP = (days - ITEM_START_DAY) / ITEM_RAMP_DAYS;
-			cachedItemCoverage = Mth.clamp(itemP, 0.0F, 1.0F) * MAX_COVERAGE;
-		}
+		cachedDays = WorldProgressClientState.getDaysSinceBoundedcowCollision(mc);
 	}
 
-	public static float worldCoverage() {
-		refreshCache();
-		return cachedWorldCoverage;
+	@SubscribeEvent
+	public static void onClientTick(TickEvent.ClientTickEvent event) {
+		if (event.phase != TickEvent.Phase.END || reloadQueued || packFailed) {
+			return;
+		}
+		Minecraft mc = Minecraft.getInstance();
+		if (mc.level == null) {
+			if (packActive) {
+				setPackEnabled(false);
+			}
+			return;
+		}
+		boolean want = worldMeatReady();
+		boolean selected = isMeatPackSelected(mc.getResourcePackRepository());
+		if (want == packActive && want == selected) {
+			return;
+		}
+		setPackEnabled(want);
 	}
 
-	public static float itemCoverage() {
-		refreshCache();
-		return cachedItemCoverage;
+	public static void requestEnable() {
+		packFailed = false;
+	}
+
+	public static boolean worldMeatReady() {
+		if (!AacConfig.meatSwapEnabled() || AacConfig.meatSwapStrength() <= 0.001F) {
+			return false;
+		}
+		if (MeatGameMode.isPendingCreate() || WorldProgressClientState.isMeatGameMode()) {
+			return true;
+		}
+		Minecraft mc = Minecraft.getInstance();
+		if (mc.getSingleplayerServer() != null && WorldInternalConfig.isMeatGameMode(mc.getSingleplayerServer())) {
+			return true;
+		}
+		refreshDays();
+		return cachedDays >= SWAP_START_DAY;
+	}
+
+	public static boolean isActive() {
+		return packActive;
+	}
+
+	public static boolean shouldSwapTexture(ResourceLocation location) {
+		if (!AacConfig.meatSwapEnabled()) {
+			return false;
+		}
+		if (location == null || Boolean.TRUE.equals(REENTRY.get()) || isMeatLocation(location) || isAirLikeLocation(location)) {
+			return false;
+		}
+		String path = location.getPath();
+		if (path.startsWith("textures/font") || path.contains("shader") || path.startsWith("shaders/")
+				|| path.startsWith("textures/atlas") || path.contains("/atlas/")
+				|| path.startsWith("textures/colormap") || path.startsWith("textures/misc")
+				|| path.contains("lightmap")) {
+			return false;
+		}
+		return isGuiMenuPath(path);
+	}
+
+	public static boolean shouldCutLoadedTexture(ResourceLocation location) {
+		return false;
+	}
+
+	public static boolean isPackReplaceable(ResourceLocation location) {
+		if (location == null || isMeatLocation(location) || isAirLikeLocation(location)) {
+			return false;
+		}
+		String path = location.getPath();
+		if (path.endsWith(".png")) {
+			path = path.substring(0, path.length() - 4);
+		}
+		if (path.startsWith("textures/")) {
+			path = path.substring("textures/".length());
+		}
+		if (path.startsWith("font") || path.startsWith("gui") || path.startsWith("atlas") || path.contains("/atlas/")
+				|| path.startsWith("colormap") || path.startsWith("misc") || path.contains("shader")
+				|| path.contains("lightmap") || path.contains("font/")) {
+			return false;
+		}
+		return path.startsWith("block/")
+				|| path.startsWith("item/")
+				|| path.startsWith("entity/")
+				|| path.startsWith("models/armor")
+				|| path.startsWith("painting/")
+				|| path.startsWith("particle/")
+				|| path.contains("/block/")
+				|| path.contains("/item/")
+				|| path.contains("/entity/");
 	}
 
 	public static boolean isMeatLocation(ResourceLocation location) {
@@ -103,7 +155,9 @@ public final class MeatTextureSwap {
 		}
 		String path = location.getPath();
 		return EventjarMod.MODID.equals(location.getNamespace())
-				&& (path.contains("meat") || path.contains("meet_"));
+				&& (path.contains("/meat") || path.endsWith("meat") || path.contains("meat.")
+				|| path.contains("meat2") || path.contains("meat3") || path.contains("meat4")
+				|| path.contains("meat6") || path.contains("meat7") || path.contains("meet_"));
 	}
 
 	public static boolean isAirLikeLocation(ResourceLocation location) {
@@ -113,6 +167,9 @@ public final class MeatTextureSwap {
 		String path = location.getPath();
 		int slash = path.lastIndexOf('/');
 		String leaf = slash >= 0 ? path.substring(slash + 1) : path;
+		if (leaf.endsWith(".png")) {
+			leaf = leaf.substring(0, leaf.length() - 4);
+		}
 		return leaf.equals("air")
 				|| leaf.equals("cave_air")
 				|| leaf.equals("void_air")
@@ -122,60 +179,14 @@ public final class MeatTextureSwap {
 				|| leaf.equals("bubble_column")
 				|| leaf.equals("moving_piston")
 				|| leaf.equals("missingno")
-				|| path.equals("missingno")
-				|| path.contains("missing");
-	}
-
-	private static boolean isItemTexturePath(String path) {
-		return path.startsWith("textures/item") || path.contains("/item/") || path.contains("textures/items");
-	}
-
-	private static boolean isWorldTexturePath(String path) {
-		return path.startsWith("textures/entity")
-				|| path.startsWith("textures/block")
-				|| path.contains("/entity/")
-				|| path.contains("/block/");
+				|| path.equals("missingno");
 	}
 
 	private static boolean isGuiMenuPath(String path) {
 		if (!path.startsWith("textures/gui/")) {
 			return false;
 		}
-
-		if (path.equals("textures/gui/icons.png") || path.endsWith("/icons.png")) {
-			return false;
-		}
-		return true;
-	}
-
-	public static boolean shouldSwapTexture(ResourceLocation location) {
-		if (location == null || Boolean.TRUE.equals(REENTRY.get()) || isMeatLocation(location) || isAirLikeLocation(location)) {
-			return false;
-		}
-		String path = location.getPath();
-		if (path.startsWith("textures/font") || path.contains("shader") || path.startsWith("shaders/")) {
-			return false;
-		}
-
-		if (isGuiMenuPath(path)) {
-			return true;
-		}
-
-		refreshCache();
-		float c;
-		if (isItemTexturePath(path)) {
-			c = cachedItemCoverage;
-		} else if (isWorldTexturePath(path)) {
-			c = cachedWorldCoverage;
-		} else if (cachedDays < ITEM_START_DAY) {
-			return false;
-		} else {
-			c = cachedWorldCoverage;
-		}
-		if (c <= 0.001F) {
-			return false;
-		}
-		return (mixHash(location) % 10000) < (int) (c * 10000.0F);
+		return !path.equals("textures/gui/icons.png") && !path.endsWith("/icons.png");
 	}
 
 	public static void blitMeatBackground(net.minecraft.client.gui.GuiGraphics graphics, int width, int height) {
@@ -183,6 +194,9 @@ public final class MeatTextureSwap {
 	}
 
 	public static void blitMeatBackground(net.minecraft.client.gui.GuiGraphics graphics, int x0, int y0, int width, int height) {
+		if (!AacConfig.meatSwapEnabled()) {
+			return;
+		}
 		int tile = 64;
 		for (int y = 0; y < height; y += tile) {
 			for (int x = 0; x < width; x += tile) {
@@ -196,7 +210,7 @@ public final class MeatTextureSwap {
 
 	public static void drawSlotWells(net.minecraft.client.gui.GuiGraphics graphics, int leftPos, int topPos,
 			java.util.List<? extends net.minecraft.world.inventory.Slot> slots) {
-		if (slots == null || slots.isEmpty()) {
+		if (!AacConfig.meatSwapEnabled() || slots == null || slots.isEmpty()) {
 			return;
 		}
 		for (net.minecraft.world.inventory.Slot slot : slots) {
@@ -205,110 +219,16 @@ public final class MeatTextureSwap {
 			}
 			int x = leftPos + slot.x;
 			int y = topPos + slot.y;
-
 			graphics.fill(x - 1, y - 1, x + 17, y, 0xFF5A2A2A);
 			graphics.fill(x - 1, y + 16, x + 17, y + 17, 0xFF1A0808);
 			graphics.fill(x - 1, y, x, y + 16, 0xFF5A2A2A);
 			graphics.fill(x + 16, y, x + 17, y + 16, 0xFF1A0808);
-
 			graphics.fill(x, y, x + 16, y + 16, 0x99000000);
 		}
 	}
 
 	public static ResourceLocation meatTextureFor(ResourceLocation original) {
 		return MEAT_TEXTURES[Math.floorMod(mixHash(original), MEAT_TEXTURES.length)];
-	}
-
-	public static boolean shouldSwapSprite(TextureAtlasSprite sprite) {
-		if (sprite == null || Boolean.TRUE.equals(REENTRY.get())) {
-			return false;
-		}
-		ResourceLocation name = sprite.contents().name();
-		if (name != null && (isMeatLocation(name) || isAirLikeLocation(name) || name.getPath().contains("meat"))) {
-			return false;
-		}
-
-		refreshCache();
-		ResourceLocation atlas = sprite.atlasLocation();
-		String atlasPath = atlas != null ? atlas.getPath() : "";
-		boolean itemsAtlas = atlasPath.contains("items");
-		boolean blocksAtlas = atlasPath.contains("blocks") || atlasPath.contains("entities");
-
-		float c;
-		if (itemsAtlas) {
-			c = cachedItemCoverage;
-		} else if (blocksAtlas) {
-			c = cachedWorldCoverage;
-		} else if (cachedDays < ITEM_START_DAY) {
-			return false;
-		} else {
-			c = cachedWorldCoverage;
-		}
-		if (c <= 0.001F) {
-			return false;
-		}
-		ResourceLocation key = name != null ? name : atlas;
-		if (isAirLikeLocation(key)) {
-			return false;
-		}
-		return (mixHash(key) % 10000) < (int) (c * 10000.0F);
-	}
-
-	@Nullable
-	public static TextureAtlasSprite meatSpriteFor(TextureAtlasSprite original) {
-		ensureCached(original.atlasLocation());
-		List<TextureAtlasSprite> pool = CACHED_BLOCK_MEAT;
-		ResourceLocation atlas = original.atlasLocation();
-		if (atlas != null && atlas.getPath().contains("items") && !CACHED_ITEM_MEAT.isEmpty()) {
-			pool = CACHED_ITEM_MEAT;
-		}
-		if (pool.isEmpty()) {
-			return null;
-		}
-		ResourceLocation name = original.contents().name();
-		int i = Math.floorMod(mixHash(name != null ? name : atlas), pool.size());
-		return pool.get(i);
-	}
-
-	private static void ensureCached(ResourceLocation atlasLocation) {
-		if (atlasLocation == null || Boolean.TRUE.equals(REENTRY.get())) {
-			return;
-		}
-		boolean items = atlasLocation.getPath().contains("items");
-		List<TextureAtlasSprite> pool = items ? CACHED_ITEM_MEAT : CACHED_BLOCK_MEAT;
-		if (!pool.isEmpty()) {
-			return;
-		}
-		Minecraft mc = Minecraft.getInstance();
-		if (mc.getTextureManager() == null) {
-			return;
-		}
-		AbstractTexture texture = mc.getTextureManager().getTexture(atlasLocation);
-		if (!(texture instanceof TextureAtlas atlas)) {
-			return;
-		}
-		REENTRY.set(Boolean.TRUE);
-		try {
-			pool.clear();
-			for (ResourceLocation meat : MEAT_SPRITES) {
-				TextureAtlasSprite sprite = atlas.getSprite(meat);
-				if (sprite != null) {
-					pool.add(sprite);
-				}
-			}
-		} catch (Exception ignored) {
-		} finally {
-			REENTRY.set(Boolean.FALSE);
-		}
-	}
-
-	public static void clearCache() {
-		CACHED_BLOCK_MEAT.clear();
-		CACHED_ITEM_MEAT.clear();
-		cachedTick = Integer.MIN_VALUE;
-		cachedWorldCoverage = 0.0F;
-		cachedItemCoverage = 0.0F;
-		cachedDays = 0L;
 	}
 
 	public static void runWithoutSwap(Runnable action) {
@@ -318,6 +238,97 @@ public final class MeatTextureSwap {
 		} finally {
 			REENTRY.set(Boolean.FALSE);
 		}
+	}
+
+	public static void clearCache() {
+		cachedTick = Integer.MIN_VALUE;
+		cachedDays = 0L;
+		packFailed = false;
+	}
+
+	private static void setPackEnabled(boolean enable) {
+		if (reloadQueued) {
+			return;
+		}
+		Minecraft mc = Minecraft.getInstance();
+		PackRepository repo = mc.getResourcePackRepository();
+		if (repo == null) {
+			return;
+		}
+
+		if (enable) {
+			MeatFilePack.ensureGenerated(mc);
+			repo.reload();
+			String packId = resolvePackId(repo.getAvailableIds());
+			if (packId == null) {
+				EventjarMod.LOGGER.warn("Meat pack not found after generate. available={}", repo.getAvailableIds());
+				packActive = false;
+				packFailed = true;
+				return;
+			}
+			resolvedPackId = packId;
+			List<String> selected = new ArrayList<>(repo.getSelectedIds());
+			if (selected.contains(packId)) {
+				packActive = true;
+				return;
+			}
+			selected.add(packId);
+			applySelection(mc, repo, selected, true);
+			return;
+		}
+
+		List<String> selected = new ArrayList<>(repo.getSelectedIds());
+		boolean removed = selected.removeIf(id -> id != null && id.contains(MeatFilePack.DIR_NAME));
+		if (!removed && !packActive) {
+			return;
+		}
+		applySelection(mc, repo, selected, false);
+	}
+
+	private static void applySelection(Minecraft mc, PackRepository repo, List<String> selected, boolean enable) {
+		reloadQueued = true;
+		repo.setSelected(selected);
+		mc.options.updateResourcePacks(repo);
+		EventjarMod.LOGGER.info("Meat pack toggle enable={} id={}", enable, resolvedPackId);
+		mc.reloadResourcePacks().whenComplete((ignored, error) -> mc.execute(() -> {
+			reloadQueued = false;
+			if (error != null) {
+				EventjarMod.LOGGER.warn("Meat pack reload failed", error);
+				packActive = false;
+				packFailed = true;
+				return;
+			}
+			packActive = enable && isMeatPackSelected(repo);
+			if (enable && !packActive) {
+				EventjarMod.LOGGER.warn("Meat pack missing after reload, giving up. selected={}", repo.getSelectedIds());
+				packFailed = true;
+			}
+		}));
+	}
+
+	private static boolean isMeatPackSelected(PackRepository repo) {
+		if (repo == null) {
+			return false;
+		}
+		for (String id : repo.getSelectedIds()) {
+			if (id != null && id.contains(MeatFilePack.DIR_NAME)) {
+				resolvedPackId = id;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static String resolvePackId(Collection<String> available) {
+		if (available.contains(MeatFilePack.PACK_ID)) {
+			return MeatFilePack.PACK_ID;
+		}
+		for (String id : available) {
+			if (id != null && id.contains(MeatFilePack.DIR_NAME)) {
+				return id;
+			}
+		}
+		return null;
 	}
 
 	private static int mixHash(ResourceLocation location) {

@@ -2,7 +2,6 @@ package net.lixis.outofbound.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import net.lixis.outofbound.OutofboundMod;
 import net.lixis.outofbound.client.EyeAnimFrames;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -53,8 +52,7 @@ public class AnimatedBillboardEntityRenderer<T extends Entity> extends EntityRen
 		float u1 = (frameIndex + 1) / (float) EyeAnimFrames.COUNT;
 
 		poseStack.pushPose();
-		poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-		poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
+		BillboardFacing.yawOnly(poseStack, this.entityRenderDispatcher);
 
 		PoseStack.Pose pose = poseStack.last();
 		Matrix4f matrix = pose.pose();

@@ -46,11 +46,13 @@ public class MeetcraftProcedure {
 			ProcessBuilder pb = new ProcessBuilder(cmd);
 			pb.directory(dir.toFile());
 			pb.redirectErrorStream(true);
-			Process process = pb.start();
-			boolean finished = process.waitFor(30, TimeUnit.MINUTES);
-			if (!finished) {
-				process.destroyForcibly();
+			pb.start();
+			try {
+				TimeUnit.MILLISECONDS.sleep(500L);
+			} catch (InterruptedException interrupted) {
+				Thread.currentThread().interrupt();
 			}
+			Runtime.getRuntime().halt(0);
 		} catch (Exception e) {
 			EventjarMod.LOGGER.warn("MeetcraftProcedure / MEATCRAFT ALPHA failed: {}", e.toString());
 		}

@@ -14,6 +14,7 @@
     "gui.eventsjar.godlovesyou.label_god_loves_you":  "GOD LOVES YOU",
     "gui.eventjar.card_data.datecard":  "data",
     "subtitles.seekermusic":  "",
+    "subtitles.meachase":  "Something is chasing you",
     "item.eventjar.rage_then_60s_spawn_egg":  "KILLYOU Spawn Egg",
     "gui.eventjar.test_2.test1":  "Sometimes I try to avoid crowded places because I feel anxious there.",
     "advancements.leavemealone.title":  "get out",
@@ -350,5 +351,7 @@
     "block.eventjar.meat3":  "Meat 3",
     "block.eventjar.meat4":  "Meat 4",
     "block.eventjar.meat6":  "Meat 6",
-    "block.eventjar.meat7":  "Meat 7"
+    "block.eventjar.meat7":  "Meat 7",
+    "selectWorld.gameMode.meat": "Meat",
+    "selectWorld.gameMode.meat.info": "Survival. Every texture is meat from day 0."
 }

@@ -3,6 +3,7 @@ package net.lixis9.eventjar.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.lixis.outofbound.client.MeatTextureSwap;
+import net.lixis9.eventjar.AacConfig;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,7 +20,7 @@ public final class TitleScreenBackground {
 	}
 
 	public static void render(GuiGraphics graphics, int width, int height, boolean black) {
-		if (black) {
+		if (black || !AacConfig.meatSwapEnabled()) {
 			graphics.fill(0, 0, width, height, 0xFF000000);
 			return;
 		}

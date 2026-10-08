@@ -19,12 +19,13 @@ public final class OsEffectDayWindows {
 	private static final String NBT_ROOT = "eventjar_os_windows";
 
 	private static final int CHECK_INTERVAL = 1200;
+	private static final int MEAT_LIMINAL_CHECK_INTERVAL = 20;
+	private static final long MEAT_LIMINAL_DAY = 5L;
 
 	private static final float ROLL_CHANCE = 0.20F;
 
 	private enum Window {
-		CALC(5, 6, ClientOsEffectPacket.Effect.CALC, "calc"),
-		MEAT_LIMINAL(6, 7, ClientOsEffectPacket.Effect.MEAT_LIMINAL, "meat_liminal"),
+		CALC(6, 7, ClientOsEffectPacket.Effect.CALC, "calc"),
 		TXT(8, 9, ClientOsEffectPacket.Effect.TXT_DESKTOP, "txt"),
 		CMD(11, 12, ClientOsEffectPacket.Effect.CMD, "cmd"),
 		BATCH(14, 15, ClientOsEffectPacket.Effect.BATCH1, "batch"),
@@ -61,9 +62,6 @@ public final class OsEffectDayWindows {
 		if (!(event.player instanceof ServerPlayer player)) {
 			return;
 		}
-		if (player.tickCount % CHECK_INTERVAL != 0) {
-			return;
-		}
 		MinecraftServer server = player.getServer();
 		if (server == null || !WorldInternalConfig.hasBoundedcowCollision(server)) {
 			return;
@@ -75,6 +73,21 @@ public final class OsEffectDayWindows {
 
 		CompoundTag root = player.getPersistentData().getCompound(NBT_ROOT);
 		boolean dirty = false;
+
+		if (days >= MEAT_LIMINAL_DAY
+				&& player.tickCount % MEAT_LIMINAL_CHECK_INTERVAL == 0
+				&& !root.getBoolean("meat_liminal")) {
+			ClientOsEffectPacket.send(player, ClientOsEffectPacket.Effect.MEAT_LIMINAL);
+			root.putBoolean("meat_liminal", true);
+			dirty = true;
+		}
+
+		if (player.tickCount % CHECK_INTERVAL != 0) {
+			if (dirty) {
+				player.getPersistentData().put(NBT_ROOT, root);
+			}
+			return;
+		}
 
 		for (Window window : Window.values()) {
 			if (!window.contains(days)) {

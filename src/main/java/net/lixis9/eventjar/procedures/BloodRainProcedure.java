@@ -1,6 +1,5 @@
 package net.lixis9.eventjar.procedures;
 
-import net.lixis9.eventjar.AacConfig;
 import net.lixis9.eventjar.EventjarMod;
 import net.lixis9.eventjar.TickThrottle;
 import net.lixis9.eventjar.network.BloodRainPacket;
@@ -33,9 +32,6 @@ public final class BloodRainProcedure {
 			return;
 		}
 		if (!(event.player.level() instanceof ServerLevel serverLevel)) {
-			return;
-		}
-		if (!AacConfig.ENABLE_BLOOD_RAIN) {
 			return;
 		}
 		if (serverLevel.dimension() != Level.OVERWORLD) {
@@ -89,7 +85,7 @@ public final class BloodRainProcedure {
 	}
 
 	public static boolean start(ServerLevel level, int durationTicks) {
-		if (!AacConfig.ENABLE_BLOOD_RAIN || durationTicks <= 0) {
+		if (durationTicks <= 0) {
 			return false;
 		}
 		int duration = Math.max(40, durationTicks);

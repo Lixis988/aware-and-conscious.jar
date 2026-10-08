@@ -45,8 +45,7 @@ public class ShakingBillboardEntityRenderer<T extends Entity> extends EntityRend
 	@Override
 	public void render(T entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
 		poseStack.pushPose();
-		poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-		poseStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
+		BillboardFacing.yawOnly(poseStack, this.entityRenderDispatcher);
 
 		float time = entity.tickCount + partialTicks;
 		int id = entity.getId();

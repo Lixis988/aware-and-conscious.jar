@@ -64,4 +64,5 @@ public class EventjarModSounds {
 	public static final RegistryObject<SoundEvent> ASYOUBREATHE = REGISTRY.register("asyoubreathe", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation("eventjar", "asyoubreathe")));
 	public static final RegistryObject<SoundEvent> SONOFGODVOICE = REGISTRY.register("sonofgodvoice", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation("eventjar", "sonofgodvoice")));
 	public static final RegistryObject<SoundEvent> MEAT_STEP = REGISTRY.register("meat_step", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation("eventjar", "meat_step")));
+	public static final RegistryObject<SoundEvent> MEACHASE = REGISTRY.register("meachase", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation("eventjar", "meachase")));
 }

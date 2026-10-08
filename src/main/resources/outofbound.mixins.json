@@ -21,6 +21,7 @@
     "EntityRenderDispatcherAccessor",
     "TextureManagerMixin",
     "ScreenMixin",
+    "CreateWorldScreenMixin",
     "AbstractContainerScreenMixin",
     "AbstractContainerScreenAccessor"
   ],
